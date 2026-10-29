@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad · Privacy Policy – XSOOW BOT</title>
+<meta name="description" content="Política de privacidad / Privacy Policy de XSOOW BOT, bot anti-spam para Discord.">
+<style>
+  :root { --bg:#ffffff; --fg:#1d2330; --muted:#5b6478; --line:#e2e6ee; --accent:#4752c4; --card:#f6f7fb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14171f; --fg:#e6e9f2; --muted:#9aa3b8; --line:#2a3040; --accent:#8c96ff; --card:#1b1f2a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.9rem; line-height:1.25; margin:0 0 4px; }
+  h2 { font-size:1.2rem; margin:32px 0 8px; padding-top:8px; border-top:1px solid var(--line); }
+  p, li { margin:8px 0; }
+  ul { padding-left:22px; }
+  a { color:var(--accent); }
+  .meta { color:var(--muted); font-size:.9rem; margin:0 0 20px; }
+  nav { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; }
+  nav a { padding:6px 12px; border:1px solid var(--line); border-radius:999px; text-decoration:none; background:var(--card); font-size:.9rem; }
+  .lang { margin-top:48px; padding-top:8px; border-top:3px solid var(--accent); }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.93rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--card); }
+  .box { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; }
+</style>
+</head>
+<body>
+<main>
+
+<nav>
+  <a href="#es">Español</a>
+  <a href="#en">English</a>
+  <a href="terminos.html">Términos / Terms</a>
+</nav>
+
+<!-- ============================ ESPAÑOL ============================ -->
+<section id="es" lang="es">
+<h1>Política de privacidad de XSOOW BOT</h1>
+<p class="meta">Última actualización: 28 de octubre de 2026</p>
+
+<p>XSOOW BOT es un bot anti-spam para Discord. Esta política explica qué información usa el bot, para qué, cuánto tiempo la conserva y cómo puedes pedir que se borre. Al añadir el bot a un servidor o usar sus comandos, aceptas esta política.</p>
+
+<h2>1. Quién es el responsable</h2>
+<p>El bot lo desarrolla y administra una persona natural, conocida en Discord como <strong>XSoow</strong>, con sede en Colombia (en adelante, "el desarrollador"). Los datos se tratan conforme a la Ley 1581 de 2012 y el Decreto 1377 de 2013 de Colombia (protección de datos personales), y a las reglas de Discord.</p>
+
+<h2>2. Qué información usa el bot</h2>
+<p>El bot recibe de Discord la información de los servidores donde está instalado. Solo la usa para detectar y frenar spam.</p>
+<table>
+  <tr><th>Dato</th><th>Para qué</th><th>¿Se guarda?</th></tr>
+  <tr><td>Contenido de los mensajes y archivos adjuntos del servidor</td><td>Revisar si son spam (enlaces, invitaciones, estafas, imágenes de spam).</td><td><strong>No se guarda</strong> en la base de datos. Se analiza en el momento, en memoria.</td></tr>
+  <tr><td>ID del servidor y de canales (registros, canales libres y vigilados)</td><td>Aplicar la configuración que elige cada servidor.</td><td>Sí, mientras el bot esté en el servidor.</td></tr>
+  <tr><td>Configuración del servidor: sensibilidad, minutos de silencio, baneo, dominios permitidos y palabras propias</td><td>Funcionamiento del bot.</td><td>Sí, mientras el bot esté en el servidor.</td></tr>
+  <tr><td>ID de usuario y número de avisos recibidos, con la fecha del último</td><td>Escalar el castigo si alguien reincide.</td><td>Sí, pero <strong>caducan a los 30 días</strong>.</td></tr>
+  <tr><td>Huella de imagen (un número de 64 bits)</td><td>Reconocer imágenes de spam ya vistas.</td><td>Solo si una imagen se confirma como spam. <strong>La imagen no se guarda</strong>, solo el número.</td></tr>
+  <tr><td>Datos públicos de la cuenta: nombre de usuario, ID, fecha de creación, fecha de ingreso al servidor y roles</td><td>Valorar el riesgo (por ejemplo, cuentas muy nuevas).</td><td>No se guardan. Se leen en el momento.</td></tr>
+</table>
+<p>El bot <strong>no</strong> pide ni guarda contraseñas, correos, números de teléfono ni datos de pago. Los mensajes privados que le escribes al bot solo se usan para responderte el menú de ayuda y no se guardan.</p>
+
+<h2>3. Para qué se usa</h2>
+<ul>
+  <li>Detectar spam, estafas, invitaciones no deseadas e imágenes de spam, y actuar según lo que configure el servidor: borrar el mensaje, silenciar o banear.</li>
+  <li>Avisar al usuario afectado y dejar un registro para el equipo del servidor.</li>
+  <li>Dar soporte y mantener el servicio.</li>
+</ul>
+<p>No vendemos datos, no hacemos publicidad con ellos y no los usamos para perfiles ni para ningún otro fin.</p>
+
+<h2>4. Mensajes que envía el bot</h2>
+<ul>
+  <li><strong>Al usuario, por mensaje privado:</strong> cuando se elimina un mensaje, el bot le envía una copia del texto (recortado) y el motivo, para que pueda pedir ayuda si fue un error.</li>
+  <li><strong>Al canal de registros del servidor:</strong> se publica el usuario, el canal, los motivos, los puntos, la acción tomada y el texto del mensaje (máximo 500 caracteres). Ese canal lo elige y lo controla el servidor, y su contenido queda en Discord, bajo las reglas del propio servidor.</li>
+</ul>
+
+<h2>5. Con quién se comparte</h2>
+<p>Con nadie, salvo lo necesario para que el bot funcione:</p>
+<ul>
+  <li><strong>Discord</strong>, la plataforma donde opera el bot.</li>
+  <li><strong>El proveedor de alojamiento</strong> donde corre el bot (Bot-Hosting.net, con servidores en Finlandia). La información se guarda y procesa allí. Su consola puede conservar por poco tiempo líneas de registro con el nombre del usuario, el servidor, el canal y los motivos de una detección.</li>
+  <li>Las autoridades competentes, si la ley lo exige.</li>
+</ul>
+
+<h2>6. Cuánto tiempo se conserva</h2>
+<ul>
+  <li><strong>Avisos de usuarios:</strong> 30 días desde el último aviso.</li>
+  <li><strong>Configuración y huellas de imágenes de un servidor:</strong> hasta que el bot sale o es expulsado de ese servidor. En ese momento <strong>se borran automáticamente</strong>.</li>
+  <li><strong>Mensajes y archivos:</strong> no se guardan.</li>
+</ul>
+
+<h2>7. Tus derechos</h2>
+<p>Como titular de tus datos puedes conocerlos, actualizarlos, pedir que se corrijan o se supriman, y revocar tu autorización. Para ejercer estos derechos, o si te llegó un aviso del bot y quieres que borremos tus avisos, escribe a los contactos del punto 10. Los administradores de un servidor pueden además quitar los avisos de un usuario con el comando <code>/perdonar</code> y sacar el bot del servidor cuando quieran.</p>
+
+<h2>8. Seguridad</h2>
+<p>La información se guarda en una base de datos del servidor donde corre el bot, y la clave de acceso del bot se mantiene como variable secreta, fuera del código. Ningún sistema es 100% seguro, pero tomamos medidas razonables para proteger los datos.</p>
+
+<h2>9. Menores de edad</h2>
+<p>El bot opera dentro de Discord, que exige tener al menos 13 años (o la edad mínima de tu país). No recopilamos datos de menores de forma intencional fuera de lo que Discord entrega a los bots instalados en un servidor.</p>
+
+<h2>10. Cambios y contacto</h2>
+<p>Podemos actualizar esta política. La fecha de arriba indica la última versión. Si el cambio es importante, avisaremos en el servidor de soporte o por el propio bot.</p>
+<div class="box">
+  <strong>Contacto:</strong> envía un mensaje privado a <strong>XSOOW BOT#8946</strong> y elige la opción <em>3 – Soporte</em>, o escribe a <strong>XSoow</strong> en Discord (ID de usuario <code>1299461377366167683</code>).
+</div>
+</section>
+
+<!-- ============================ ENGLISH ============================ -->
+<section id="en" lang="en" class="lang">
+<h1>XSOOW BOT Privacy Policy</h1>
+<p class="meta">Last updated: October 28, 2026</p>
+
+<p>XSOOW BOT is an anti-spam bot for Discord. This policy explains what information the bot uses, why, how long it is kept, and how you can ask for it to be deleted. By adding the bot to a server or using its commands, you accept this policy.</p>
+
+<h2>1. Who is responsible</h2>
+<p>The bot is developed and operated by an individual known on Discord as <strong>XSoow</strong>, based in Colombia ("the developer"). Personal data is handled in accordance with Colombian data protection law (Law 1581 of 2012 and Decree 1377 of 2013) and Discord's rules.</p>
+
+<h2>2. What information the bot uses</h2>
+<p>The bot receives information from Discord about the servers where it is installed. It uses it only to detect and stop spam.</p>
+<table>
+  <tr><th>Data</th><th>Purpose</th><th>Stored?</th></tr>
+  <tr><td>Content of server messages and attachments</td><td>Check whether they are spam (links, invites, scams, spam images).</td><td><strong>Not stored</strong> in the database. Analyzed on the spot, in memory.</td></tr>
+  <tr><td>Server ID and channel IDs (log, free and watched channels)</td><td>Apply each server's settings.</td><td>Yes, while the bot is in the server.</td></tr>
+  <tr><td>Server settings: sensitivity, timeout minutes, ban setting, allowed domains and custom words</td><td>Bot operation.</td><td>Yes, while the bot is in the server.</td></tr>
+  <tr><td>User ID and number of warnings received, with the date of the latest one</td><td>Escalate the penalty for repeat offenders.</td><td>Yes, but they <strong>expire after 30 days</strong>.</td></tr>
+  <tr><td>Image fingerprint (a 64-bit number)</td><td>Recognize spam images already seen.</td><td>Only when an image is confirmed as spam. <strong>The image itself is not stored</strong>, only the number.</td></tr>
+  <tr><td>Public account data: username, ID, account creation date, server join date and roles</td><td>Assess risk (for example, very new accounts).</td><td>Not stored. Read at the moment of the check.</td></tr>
+</table>
+<p>The bot does <strong>not</strong> ask for or store passwords, emails, phone numbers or payment details. Direct messages you send to the bot are only used to reply with its help menu and are not stored.</p>
+
+<h2>3. How it is used</h2>
+<ul>
+  <li>To detect spam, scams, unwanted invites and spam images, and to act according to the server's settings: delete the message, time the user out, or ban.</li>
+  <li>To notify the affected user and leave a record for the server's staff.</li>
+  <li>To provide support and maintain the service.</li>
+</ul>
+<p>We do not sell data, we do not use it for advertising, and we do not use it for profiling or any other purpose.</p>
+
+<h2>4. Messages the bot sends</h2>
+<ul>
+  <li><strong>To the user, by direct message:</strong> when a message is removed, the bot sends a copy of the text (shortened) and the reason, so the user can ask for help if it was a mistake.</li>
+  <li><strong>To the server's log channel:</strong> the user, channel, reasons, points, action taken and the message text (up to 500 characters) are posted. The server chooses and controls that channel, and its content stays on Discord under the server's own rules.</li>
+</ul>
+
+<h2>5. Who it is shared with</h2>
+<p>No one, except what is needed for the bot to work:</p>
+<ul>
+  <li><strong>Discord</strong>, the platform where the bot operates.</li>
+  <li><strong>The hosting provider</strong> where the bot runs (Bot-Hosting.net, with servers in Finland). Data is stored and processed there. Its console may briefly keep log lines with the username, server, channel and reasons for a detection.</li>
+  <li>Competent authorities, if required by law.</li>
+</ul>
+
+<h2>6. How long it is kept</h2>
+<ul>
+  <li><strong>User warnings:</strong> 30 days from the latest warning.</li>
+  <li><strong>A server's settings and image fingerprints:</strong> until the bot leaves or is removed from that server. At that point they are <strong>deleted automatically</strong>.</li>
+  <li><strong>Messages and files:</strong> not stored.</li>
+</ul>
+
+<h2>7. Your rights</h2>
+<p>As the owner of your data you may access it, update it, ask for it to be corrected or deleted, and withdraw your consent. To exercise these rights, or if you received a bot notice and want your warnings removed, contact us using section 10. Server administrators can also remove a user's warnings with the <code>/perdonar</code> command and remove the bot from the server at any time.</p>
+
+<h2>8. Security</h2>
+<p>Data is kept in a database on the server where the bot runs, and the bot's access key is kept as a secret variable, outside the code. No system is 100% secure, but we take reasonable measures to protect data.</p>
+
+<h2>9. Minors</h2>
+<p>The bot operates inside Discord, which requires users to be at least 13 (or the minimum age in your country). We do not intentionally collect data from minors beyond what Discord provides to bots installed in a server.</p>
+
+<h2>10. Changes and contact</h2>
+<p>We may update this policy. The date above shows the latest version. For important changes, we will notify through the support server or the bot itself.</p>
+<div class="box">
+  <strong>Contact:</strong> send a direct message to <strong>XSOOW BOT#8946</strong> and choose option <em>3 – Support</em>, or message <strong>XSoow</strong> on Discord (user ID <code>1299461377366167683</code>).
+</div>
+</section>
+
+</main>
+</body>
+</html>
