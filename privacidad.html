@@ -40,7 +40,7 @@
 <!-- ============================ ESPAÑOL ============================ -->
 <section id="es" lang="es">
 <h1>Política de privacidad de XSOOW BOT</h1>
-<p class="meta">Última actualización: 29 de octubre de 2026</p>
+<p class="meta">Última actualización: 30 de octubre de 2026</p>
 
 <p>XSOOW BOT es un bot anti-spam para Discord. Esta política explica qué información usa el bot, para qué, cuánto tiempo la conserva y cómo puedes pedir que se borre. Al añadir el bot a un servidor o usar sus comandos, aceptas esta política.</p>
 
@@ -54,12 +54,13 @@
   <tr><td>Contenido de los mensajes y archivos adjuntos del servidor</td><td>Revisar si son spam (enlaces, invitaciones, estafas, imágenes de spam).</td><td><strong>No se guarda</strong> en la base de datos. Se analiza en el momento, en memoria.</td></tr>
   <tr><td>ID del servidor y de canales (registros, canales libres y vigilados)</td><td>Aplicar la configuración que elige cada servidor.</td><td>Sí, mientras el bot esté en el servidor.</td></tr>
   <tr><td>Configuración del servidor: sensibilidad, minutos de silencio, baneo, dominios permitidos y palabras propias</td><td>Funcionamiento del bot.</td><td>Sí, mientras el bot esté en el servidor.</td></tr>
-  <tr><td>ID de usuario y número de avisos recibidos, con la fecha del último</td><td>Escalar el castigo si alguien reincide.</td><td>Sí, pero <strong>caducan a los 30 días</strong>.</td></tr>
+  <tr><td>ID de usuario y número de avisos recibidos, con la fecha del último</td><td>Escalar el castigo si alguien reincide.</td><td>Sí, pero <strong>caducan a los 30 días</strong> y el bot los borra automáticamente.</td></tr>
   <tr><td>ID del servidor y del dueño del servidor, fecha de la prueba de Premium, fecha de vencimiento de Premium y registro de activaciones (días y fecha)</td><td>Dar la prueba gratuita una sola vez, activar Premium y avisar de los vencimientos.</td><td>Sí. Es <strong>lo único que se conserva</strong> si el bot sale del servidor.</td></tr>
+  <tr><td>Datos de la compra que tú envías al desarrollador: nombre del servidor, plan, importe, método de pago, comprobante y fecha de la transacción</td><td>Identificar el servidor, comprobar el plan, verificar la recepción del pago, activar manualmente el plan, llevar un registro de compras y vencimientos y resolver problemas de pagos, activaciones y reembolsos.</td><td>No los guarda el bot en su base de datos: los recibe el desarrollador por Discord y los consulta en el medio de pago. El tiempo que se conservan está <strong>pendiente de definir</strong>.</td></tr>
   <tr><td>Huella de imagen (un número de 64 bits)</td><td>Reconocer imágenes de spam ya vistas.</td><td>Solo si una imagen se confirma como spam. <strong>La imagen no se guarda</strong>, solo el número.</td></tr>
   <tr><td>Datos públicos de la cuenta: nombre de usuario, ID, fecha de creación, fecha de ingreso al servidor y roles</td><td>Valorar el riesgo (por ejemplo, cuentas muy nuevas).</td><td>No se guardan. Se leen en el momento.</td></tr>
 </table>
-<p>El bot <strong>no</strong> pide ni guarda contraseñas, correos, números de teléfono ni datos de pago (solo se anota qué servidor tiene Premium, hasta cuándo y cuántos días se activaron). Los mensajes privados que le escribes al bot solo se usan para responderte el menú de ayuda y no se guardan.</p>
+<p>El bot <strong>no</strong> pide ni guarda contraseñas, correos, números de teléfono ni datos de tarjetas o cuentas bancarias. Los pagos se hacen fuera del bot; el bot solo anota qué servidor tiene Premium, hasta cuándo y cuántos días se activaron. Los mensajes privados que le escribes al bot solo se usan para responderte el menú de ayuda y no se guardan.</p>
 
 <h2>3. Para qué se usa</h2>
 <ul>
@@ -80,6 +81,7 @@
 <ul>
   <li><strong>Discord</strong>, la plataforma donde opera el bot.</li>
   <li><strong>El proveedor de alojamiento</strong> donde corre el bot (Bot-Hosting.net, con servidores en Finlandia). La información se guarda y procesa allí. Su consola puede conservar por poco tiempo líneas de registro con el nombre del usuario, el servidor, el canal y los motivos de una detección.</li>
+  <li><strong>El medio de pago</strong> que elijas para comprar Premium, que procesa tu pago según sus propias políticas. El desarrollador solo ve lo que ese medio le muestra de la transacción y el comprobante que tú envíes.</li>
   <li>Las autoridades competentes, si la ley lo exige.</li>
 </ul>
 
@@ -88,11 +90,13 @@
   <li><strong>Avisos de usuarios:</strong> 30 días desde el último aviso.</li>
   <li><strong>Configuración y huellas de imágenes de un servidor:</strong> hasta que el bot sale o es expulsado de ese servidor. En ese momento <strong>se borran automáticamente</strong>.</li>
   <li><strong>Registro de prueba y Premium</strong> (ID del servidor, ID del dueño, fechas y días activados): se conserva aunque el bot salga, para no repetir la prueba gratuita y para respaldar pagos y reembolsos. Puedes pedir que se suprima escribiendo a los contactos del punto 10; se atenderá salvo lo necesario para evitar abusos de la prueba o cumplir obligaciones legales.</li>
+  <li><strong>Comprobantes y datos de la compra</strong> (importe, método de pago, fecha): no los guarda el bot. Su tiempo de conservación está pendiente de definir.</li>
+  <li><strong>Copias de seguridad:</strong> el bot guarda automáticamente las últimas 7 copias diarias de su base de datos en el alojamiento, y el desarrollador puede descargar copias manuales. Contienen los mismos datos que la base de datos. No se ha fijado todavía un plazo para borrar las copias manuales (pendiente de definir).</li>
   <li><strong>Mensajes y archivos:</strong> no se guardan.</li>
 </ul>
 
 <h2>7. Tus derechos</h2>
-<p>Como titular de tus datos puedes conocerlos, actualizarlos, pedir que se corrijan o se supriman, y revocar tu autorización. Para ejercer estos derechos, o si te llegó un aviso del bot y quieres que borremos tus avisos, escribe a los contactos del punto 10. Los administradores de un servidor pueden además quitar los avisos de un usuario con el comando <code>/perdonar</code> y sacar el bot del servidor cuando quieran.</p>
+<p>Como titular de tus datos puedes conocerlos, actualizarlos, pedir que se corrijan o se supriman, y revocar tu autorización. Para ejercer estos derechos, o si te llegó un aviso del bot y quieres que borremos tus avisos, escribe a los contactos del punto 10 indicando tu ID de usuario de Discord (o el ID del servidor) y qué quieres corregir o borrar. Responderemos en un plazo razonable y dentro de los plazos que fije la ley colombiana. Los administradores de un servidor pueden además quitar los avisos de un usuario con el comando <code>/perdonar</code> y sacar el bot del servidor cuando quieran.</p>
 
 <h2>8. Seguridad</h2>
 <p>La información se guarda en una base de datos del servidor donde corre el bot, y la clave de acceso del bot se mantiene como variable secreta, fuera del código. Ningún sistema es 100% seguro, pero tomamos medidas razonables para proteger los datos.</p>
@@ -103,14 +107,14 @@
 <h2>10. Cambios y contacto</h2>
 <p>Podemos actualizar esta política. La fecha de arriba indica la última versión. Si el cambio es importante, avisaremos en el servidor de soporte o por el propio bot.</p>
 <div class="box">
-  <strong>Contacto:</strong> envía un mensaje privado a <strong>XSOOW BOT#8946</strong> y elige la opción <em>3 – Soporte</em>, o escribe a <strong>XSoow</strong> en Discord (ID de usuario <code>1299461377366167683</code>).
+  <strong>Contacto:</strong> escribe a <strong>XSoow</strong> en Discord: <a href="https://discord.com/users/1299461377366167683">https://discord.com/users/1299461377366167683</a> (ID de usuario <code>1299461377366167683</code>), o envía un mensaje privado a <strong>XSOOW BOT</strong> y elige la opción <em>3 – Soporte</em>.
 </div>
 </section>
 
 <!-- ============================ ENGLISH ============================ -->
 <section id="en" lang="en" class="lang">
 <h1>XSOOW BOT Privacy Policy</h1>
-<p class="meta">Last updated: October 29, 2026</p>
+<p class="meta">Last updated: October 30, 2026</p>
 
 <p>XSOOW BOT is an anti-spam bot for Discord. This policy explains what information the bot uses, why, how long it is kept, and how you can ask for it to be deleted. By adding the bot to a server or using its commands, you accept this policy.</p>
 
@@ -124,12 +128,13 @@
   <tr><td>Content of server messages and attachments</td><td>Check whether they are spam (links, invites, scams, spam images).</td><td><strong>Not stored</strong> in the database. Analyzed on the spot, in memory.</td></tr>
   <tr><td>Server ID and channel IDs (log, free and watched channels)</td><td>Apply each server's settings.</td><td>Yes, while the bot is in the server.</td></tr>
   <tr><td>Server settings: sensitivity, timeout minutes, ban setting, allowed domains and custom words</td><td>Bot operation.</td><td>Yes, while the bot is in the server.</td></tr>
-  <tr><td>User ID and number of warnings received, with the date of the latest one</td><td>Escalate the penalty for repeat offenders.</td><td>Yes, but they <strong>expire after 30 days</strong>.</td></tr>
+  <tr><td>User ID and number of warnings received, with the date of the latest one</td><td>Escalate the penalty for repeat offenders.</td><td>Yes, but they <strong>expire after 30 days</strong> and the bot deletes them automatically.</td></tr>
   <tr><td>Server ID and server owner ID, Premium trial date, Premium expiry date and activation record (days and date)</td><td>Give the free trial only once, activate Premium and warn about expiry.</td><td>Yes. It is <strong>the only thing kept</strong> if the bot leaves the server.</td></tr>
+  <tr><td>Purchase data that you send to the developer: server name, plan, amount, payment method, proof of payment and transaction date</td><td>Identify the server, check the plan, verify that the payment was received, manually activate the plan, keep a record of purchases and expiry dates, and resolve problems with payments, activations and refunds.</td><td>The bot does not store it in its database: the developer receives it through Discord and checks it in the payment method. How long it is kept is <strong>still to be defined</strong>.</td></tr>
   <tr><td>Image fingerprint (a 64-bit number)</td><td>Recognize spam images already seen.</td><td>Only when an image is confirmed as spam. <strong>The image itself is not stored</strong>, only the number.</td></tr>
   <tr><td>Public account data: username, ID, account creation date, server join date and roles</td><td>Assess risk (for example, very new accounts).</td><td>Not stored. Read at the moment of the check.</td></tr>
 </table>
-<p>The bot does <strong>not</strong> ask for or store passwords, emails, phone numbers or payment details (it only records which server has Premium, until when, and how many days were activated). Direct messages you send to the bot are only used to reply with its help menu and are not stored.</p>
+<p>The bot does <strong>not</strong> ask for or store passwords, emails, phone numbers or card or bank account details. Payments are made outside the bot; the bot only records which server has Premium, until when, and how many days were activated. Direct messages you send to the bot are only used to reply with its help menu and are not stored.</p>
 
 <h2>3. How it is used</h2>
 <ul>
@@ -150,6 +155,7 @@
 <ul>
   <li><strong>Discord</strong>, the platform where the bot operates.</li>
   <li><strong>The hosting provider</strong> where the bot runs (Bot-Hosting.net, with servers in Finland). Data is stored and processed there. Its console may briefly keep log lines with the username, server, channel and reasons for a detection.</li>
+  <li><strong>The payment method</strong> you choose to buy Premium, which processes your payment under its own policies. The developer only sees what that method shows of the transaction and the proof of payment you send.</li>
   <li>Competent authorities, if required by law.</li>
 </ul>
 
@@ -158,11 +164,13 @@
   <li><strong>User warnings:</strong> 30 days from the latest warning.</li>
   <li><strong>A server's settings and image fingerprints:</strong> until the bot leaves or is removed from that server. At that point they are <strong>deleted automatically</strong>.</li>
   <li><strong>Trial and Premium record</strong> (server ID, owner ID, dates and days activated): kept even if the bot leaves, so the free trial is not repeated and to back up payments and refunds. You can ask for it to be deleted by writing to the contacts in section 10; it will be handled except what is needed to prevent trial abuse or to meet legal obligations.</li>
+  <li><strong>Proof of payment and purchase data</strong> (amount, payment method, date): not stored by the bot. How long they are kept is still to be defined.</li>
+  <li><strong>Backups:</strong> the bot automatically keeps the last 7 daily copies of its database on the hosting, and the developer may download manual copies. They contain the same data as the database. A deadline for deleting manual copies has not been set yet (still to be defined).</li>
   <li><strong>Messages and files:</strong> not stored.</li>
 </ul>
 
 <h2>7. Your rights</h2>
-<p>As the owner of your data you may access it, update it, ask for it to be corrected or deleted, and withdraw your consent. To exercise these rights, or if you received a bot notice and want your warnings removed, contact us using section 10. Server administrators can also remove a user's warnings with the <code>/perdonar</code> command and remove the bot from the server at any time.</p>
+<p>As the owner of your data you may access it, update it, ask for it to be corrected or deleted, and withdraw your consent. To exercise these rights, or if you received a bot notice and want your warnings removed, contact us using section 10, stating your Discord user ID (or the server ID) and what you want corrected or deleted. We will reply within a reasonable time and within the deadlines set by Colombian law. Server administrators can also remove a user's warnings with the <code>/perdonar</code> command and remove the bot from the server at any time.</p>
 
 <h2>8. Security</h2>
 <p>Data is kept in a database on the server where the bot runs, and the bot's access key is kept as a secret variable, outside the code. No system is 100% secure, but we take reasonable measures to protect data.</p>
@@ -173,11 +181,10 @@
 <h2>10. Changes and contact</h2>
 <p>We may update this policy. The date above shows the latest version. For important changes, we will notify through the support server or the bot itself.</p>
 <div class="box">
-  <strong>Contact:</strong> send a direct message to <strong>XSOOW BOT#8946</strong> and choose option <em>3 – Support</em>, or message <strong>XSoow</strong> on Discord (user ID <code>1299461377366167683</code>).
+  <strong>Contact:</strong> message <strong>XSoow</strong> on Discord: <a href="https://discord.com/users/1299461377366167683">https://discord.com/users/1299461377366167683</a> (user ID <code>1299461377366167683</code>), or send a direct message to <strong>XSOOW BOT</strong> and choose option <em>3 – Support</em>.
 </div>
 </section>
 
 </main>
 </body>
 </html>
-
