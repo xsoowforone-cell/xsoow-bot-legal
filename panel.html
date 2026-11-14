@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel · XSOOW BOT</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e11d2e'/%3E%3Cpath d='M16 6l8 3v7c0 5-3.5 8.500-8 10-4.500-1.500-8-5-8-10V9z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090d;--bg2:#101017;--card:#15151d;--line:#272733;--red:#e11d2e;--hi:#ff4455;--mut:#a2a2b3;--tx:#f2f2f6;--d:"Inter Tight",system-ui,sans-serif;--m:"JetBrains Mono",ui-monospace,monospace}
+*{box-sizing:border-box}html{scrollbar-gutter:stable}
+body{margin:0;background:radial-gradient(900px 500px at 80% -10%,rgba(225,29,46,.18),transparent 60%),var(--bg);color:var(--tx);font:400 16px/1.5 Inter,system-ui,sans-serif;min-height:100vh}
+a{color:inherit}.mut{color:var(--mut);font-size:.92rem;margin:.3rem 0 .8rem}.pad{padding:12px}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);border-bottom:1px solid var(--line);background:rgba(9,9,13,.8);position:sticky;top:0;z-index:5}
+.logo{display:flex;gap:10px;align-items:center;font:800 1.05rem var(--d);text-decoration:none}
+.who{display:flex;gap:10px;align-items:center}.who img{width:30px;height:30px;border-radius:50%}
+.btn{display:inline-block;border:0;border-radius:10px;background:var(--red);color:#fff;font:600 .95rem Inter;padding:11px 18px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--hi)}.btn.sm{padding:8px 14px}.btn.ghost{background:transparent;border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--red)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+#login{max-width:560px;margin:12vh auto;padding:0 20px;text-align:center;perspective:900px}
+#login .card{padding:38px;animation:in .7s cubic-bezier(.2,.8,.2,1) both}
+h1{font:800 clamp(2rem,5vw,2.8rem)/1.05 var(--d);letter-spacing:-.02em;margin:0 0 12px}h3{font:700 1.05rem var(--d);margin:0 0 4px;display:flex;gap:8px;align-items:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card em{font:700 .66rem var(--m);font-style:normal;background:var(--red);padding:3px 8px;border-radius:99px}
+.card.lock{border-color:rgba(225,29,46,.4)}.card.lock .chip,.card.lock input,.card.lock select{opacity:.55}
+#app{display:grid;grid-template-columns:230px 1fr;gap:20px;max-width:1180px;margin:22px auto;padding:0 clamp(12px,3vw,24px)}
+#servers{display:flex;flex-direction:column;gap:6px}
+.sv{display:flex;align-items:center;gap:10px;background:transparent;border:1px solid transparent;border-radius:12px;color:var(--tx);padding:9px 10px;cursor:pointer;text-align:left;font:500 .92rem Inter}
+.sv:hover{background:var(--bg2)}.sv.on{background:var(--card);border-color:var(--red)}
+.sv img,.ini{width:32px;height:32px;border-radius:50%;flex:none;background:var(--line);display:grid;place-items:center;font:700 .9rem var(--d)}
+.sv span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 18px}
+.tabs button{background:var(--bg2);border:1px solid var(--line);border-radius:99px;color:var(--mut);padding:7px 15px;cursor:pointer;font:500 .9rem Inter}
+.tabs button.on{background:var(--red);border-color:var(--red);color:#fff}
+.badge{font:600 .72rem var(--m);border:1px solid var(--line);border-radius:99px;padding:4px 10px;color:var(--mut)}.badge.premium,.badge.prueba{border-color:var(--red);color:#ffb3ba}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;perspective:1100px}
+.grid>.card,#view>.card{animation:in .55s cubic-bezier(.2,.8,.2,1) both}.grid>.card:nth-child(2){animation-delay:.05s}.grid>.card:nth-child(3){animation-delay:.1s}.grid>.card:nth-child(n+4){animation-delay:.15s}
+@keyframes in{from{opacity:0;transform:translateY(18px) rotateX(-10deg)}}
+.big{font:800 1.8rem var(--d);margin:.2rem 0}.wide{grid-column:1/-1}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.bar{justify-content:space-between;margin-bottom:14px}
+input[type=text],input[type=number],input:not([type]),select{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:10px 12px;font:400 .95rem Inter;min-width:0;flex:1}
+input:focus,select:focus{outline:2px solid var(--red);outline-offset:1px}input[type=number]{max-width:130px;flex:none}
+.sw{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}.sw:first-of-type{border:0}
+.sw span{display:flex;flex-direction:column}.sw small{color:var(--mut)}.sw input{position:absolute;opacity:0}
+.sw i{width:44px;height:25px;border-radius:99px;background:var(--line);position:relative;flex:none;transition:.2s}
+.sw i::after{content:"";position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--red)}.sw input:checked+i::after{transform:translateX(19px)}.sw input:focus-visible+i{outline:2px solid var(--hi)}
+.seg{display:flex;gap:6px}.seg button{flex:1;background:var(--bg);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px;cursor:pointer;font:600 .92rem Inter}.seg button.on{background:var(--red);border-color:var(--red)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}.chip{display:inline-flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 6px 5px 12px;font:500 .85rem var(--m)}
+.chip small{color:var(--mut)}.chip.f{border-color:rgba(225,29,46,.6)}.chip button{border:0;background:var(--line);color:var(--tx);border-radius:50%;width:22px;height:22px;cursor:pointer;line-height:1}.chip button:hover{background:var(--red)}
+.log{display:flex;flex-direction:column;gap:10px}.msg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.mh{display:flex;gap:8px;align-items:center}.mh small{color:var(--mut);margin-left:auto}.bot{font:700 .62rem var(--m);background:#5865f2;border-radius:4px;padding:2px 5px}
+.msg p{margin:.3rem 0;overflow-wrap:anywhere}.emb{border-left:4px solid var(--red);background:var(--bg);border-radius:6px;padding:8px 12px;margin-top:8px}.emb p{font-size:.92rem;margin:.15rem 0;color:#d4d4de}
+#toast{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:20}
+.t{background:var(--card);border:1px solid var(--line);border-left:4px solid #3ba55d;border-radius:10px;padding:11px 16px;box-shadow:0 12px 30px #0008;animation:in .3s both}.t.mal{border-left-color:var(--red)}
+[hidden]{display:none!important}
+@media(max-width:820px){#app{grid-template-columns:1fr}#servers{flex-direction:row;overflow-x:auto}.sv{flex:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#e11d2e"/><path d="M16 6l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V9z" fill="none" stroke="#fff" stroke-width="2"/><path d="M12 16.500l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg>XSOOW BOT <span class="badge">Panel</span></a>
+  <div class="who" id="who" hidden><img id="av" alt=""><b id="nm"></b><button class="btn ghost sm" id="out">Salir</button></div>
+</header>
+<section id="login" hidden>
+  <div class="card">
+    <h1>Administra tu bot desde la web</h1>
+    <p class="mut" id="lmsg">Entra con Discord. Solo verás los servidores donde el bot está y tienes permiso de administrar. Solo leemos tu nombre de usuario.</p>
+    <a class="btn" id="go" href="#">Entrar con Discord</a>
+  </div>
+</section>
+<section id="app" hidden>
+  <aside id="servers"></aside>
+  <div><div class="row bar" id="head"></div><nav class="tabs" id="tabs"></nav><div id="view"></div></div>
+</section>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+// Dirección pública de la API del bot (PANEL_URL). Cámbiala por la tuya.
+const GUARDADA=(()=>{try{return localStorage.getItem('xs_api')}catch(e){return null}})();
+const API=(/^(localhost|127\.0\.0\.1)$/.test(location.hostname)&&new URLSearchParams(location.search).get('api'))||GUARDADA||'https://8nwgvukcs1.apps.bot-hosting.cloud';
+const $=s=>document.querySelector(s),S={tok:null,gid:null,st:null,tab:'general',guilds:[],pausa:false};
+const h=(t,p,...k)=>{const e=document.createElement(t);for(const[a,v]of Object.entries(p||{})){if(a.startsWith('on'))e.addEventListener(a.slice(2),v);else if(a==='class')e.className=v;else if(v!==false&&v!=null)e.setAttribute(a,v===true?'':v)}e.append(...k.flat().filter(c=>c!=null&&c!==false));return e};
+const ss=(f,...a)=>{try{return sessionStorage[f](...a)}catch(e){return null}};
+async function api(path,body){let r;try{r=await fetch(API+path,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+S.tok,'ngrok-skip-browser-warning':'1',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined})}catch(e){throw new Error('No se pudo conectar con el servidor del panel')}
+ let d={};try{d=await r.json()}catch(e){}if(r.status===401){salir();throw new Error(d.error||'Sesión vencida')}if(!r.ok)throw new Error(d.error||'Error '+r.status);return d}
+const aviso=(t,mal)=>{const e=h('div',{class:'t'+(mal?' mal':'')},t);$('#toast').append(e);setTimeout(()=>e.remove(),4500)};
+const accion=async f=>{try{await f()}catch(e){aviso(e.message,true)}};
+const cfgSet=c=>accion(async()=>{S.st=await api('/api/guild/'+S.gid+'/config',c);aviso('Guardado');pintar()});
+const lista=(l,a,v,f)=>accion(async()=>{S.st=await api('/api/guild/'+S.gid+'/list',{lista:l,accion:a,valor:v,fuerte:f});pintar()});
+const prem=()=>S.st.plan!=='gratis',cand=p=>p?null:h('em',null,'Premium');
+const sw=(t,d,on,fn)=>h('label',{class:'sw'},h('span',null,h('b',null,t),h('small',null,d)),h('input',{type:'checkbox',checked:on,onchange:e=>fn(e.target.checked)}),h('i'));
+const chips=(ids,fmt,quitar)=>h('div',{class:'chips'},ids.length?ids.map(i=>h('span',{class:'chip'},fmt(i),h('button',{title:'Quitar',onclick:()=>quitar(i)},'×'))):h('span',{class:'mut'},'Ninguno'));
+function vGeneral(){const s=S.st,p=prem();return h('div',{class:'grid'},
+ h('div',{class:'card'},h('h3',null,'Plan'),h('p',{class:'big'},{premium:'Premium',prueba:'Prueba de 7 días',gratis:'Gratis'}[s.plan]),h('p',{class:'mut'},s.hasta?'Vence el '+new Date(s.hasta*1000).toLocaleDateString('es'):'Con Premium: silencio y baneo, palabras propias y canales vigilados.'),h('a',{class:'btn ghost sm',href:'index.html#planes'},'Ver planes')),
+ h('div',{class:'card'},h('h3',null,'Comportamiento'),sw('Modo prueba','Solo avisa en el registro: no borra ni castiga.',s.prueba,v=>cfgSet({prueba:v})),sw('Ignorar al staff','No revisa a quien gestiona mensajes.',s.ignorar_staff,v=>cfgSet({ignorar_staff:v}))),
+ h('div',{class:'card'},h('h3',null,'Sensibilidad'),h('p',{class:'mut'},'Bajo: menos falsos positivos. Alto: actúa con menos señales.'+(s.sensibilidad==='personalizada'?' Ahora tienes valores personalizados.':'')),h('div',{class:'seg'},['bajo','medio','alto'].map(n=>h('button',{class:s.sensibilidad===n?'on':'',onclick:()=>cfgSet({sensibilidad:n})},n[0].toUpperCase()+n.slice(1))))),
+ h('div',{class:'card'},h('h3',null,'Canal de registro'),h('p',{class:'mut'},'Aquí deja el bot cada detección.'),h('select',{onchange:e=>e.target.value&&cfgSet({logs_id:e.target.value})},h('option',{value:''},'— Elige un canal —'),s.canales.map(c=>h('option',{value:c.id,selected:c.id===s.logs_id},'# '+c.nombre)))),
+ h('div',{class:'card'+(p?'':' lock')},h('h3',null,'Castigo',cand(p)),h('p',{class:'mut'},'Minutos de silencio base; se multiplican si reincide.'),h('div',{class:'row'},h('input',{type:'number',id:'cmin',min:1,max:10080,value:s.castigo_min,disabled:!p}),h('button',{class:'btn sm',disabled:!p,onclick:()=>cfgSet({castigo_min:+$('#cmin').value})},'Guardar'))),
+ h('div',{class:'card'+(p?'':' lock')},h('h3',null,'Baneo automático',cand(p)),h('p',{class:'mut'},'Banea el spam muy grave. Puntos de 8 a 40, mayores que los de silencio ('+s.p_castigo+').'),h('div',{class:'row'},h('input',{type:'number',id:'pban',min:8,max:40,value:s.p_ban||12,disabled:!p}),h('button',{class:'btn sm',disabled:!p,onclick:()=>cfgSet({p_ban:+$('#pban').value})},s.p_ban?'Actualizar':'Activar'),s.p_ban?h('button',{class:'btn ghost sm',onclick:()=>cfgSet({p_ban:0})},'Desactivar'):null)))}
+function vCanales(){const s=S.st,p=prem(),mp={};s.canales.forEach(c=>mp[c.id]='# '+c.nombre);s.categorias.forEach(c=>mp[c.id]='▸ '+c.nombre);const f=i=>mp[i]||'#'+i,sel=(id,o)=>h('select',{id},o.map(c=>h('option',{value:c.id},mp[c.id])));
+ return h('div',{class:'grid'},
+ h('div',{class:'card wide'},h('h3',null,'Canales libres'),h('p',{class:'mut'},'Permiten enlaces e imágenes sin revisión.'),chips(s.libres,f,i=>lista('libres','remove',i)),h('div',{class:'row'},sel('lib',s.canales),h('button',{class:'btn sm',onclick:()=>lista('libres','add',$('#lib').value)},'Añadir'))),
+ h('div',{class:'card wide'+(p?'':' lock')},h('h3',null,'Canales vigilados',cand(p)),h('p',{class:'mut'},s.vigilados.length?'El bot solo revisa estos canales o categorías.':'Sin lista, el bot vigila todo el servidor.'),chips(s.vigilados,f,i=>lista('vigilados','remove',i)),h('div',{class:'row'},sel('vig',[...s.categorias,...s.canales]),h('button',{class:'btn sm',disabled:!p,onclick:()=>lista('vigilados','add',$('#vig').value)},'Añadir'),s.vigilados.length?h('button',{class:'btn ghost sm',onclick:()=>accion(async()=>{S.st=await api('/api/guild/'+S.gid+'/vigilar-todos',{});pintar()})},'Vigilar todo'):null)))}
+const vDominios=()=>h('div',{class:'card'},h('h3',null,'Sitios permitidos'),h('p',{class:'mut'},'Los enlaces a estos dominios no se borran (además de la lista base del bot).'),chips(S.st.dominios,d=>d,d=>lista('dominios','remove',d)),h('div',{class:'row'},h('input',{id:'dom',placeholder:'miweb.com',onkeydown:e=>e.key==='Enter'&&$('#adom').click()}),h('button',{id:'adom',class:'btn sm',onclick:()=>lista('dominios','add',$('#dom').value)},'Añadir')));
+function vPalabras(){const s=S.st,p=prem();return h('div',{class:'card'+(p?'':' lock')},h('h3',null,'Palabras propias',cand(p)),h('p',{class:'mut'},'Fuerte = spam seguro (3 puntos). Débil = solo sospechosa (1 punto). Mínimo 4 letras. '+s.palabras.length+'/'+s.max_palabras),h('div',{class:'chips'},s.palabras.length?s.palabras.map(w=>h('span',{class:'chip'+(w.f?' f':'')},w.p,h('small',null,w.f?'fuerte':'débil'),h('button',{title:'Quitar',onclick:()=>lista('palabras','remove',w.p)},'×'))):h('span',{class:'mut'},'Ninguna')),h('div',{class:'row'},h('input',{id:'pal',placeholder:'ej. gana dinero fácil',disabled:!p}),h('select',{id:'tp',disabled:!p,style:'max-width:120px;flex:none'},h('option',{value:'1'},'Fuerte'),h('option',{value:'0'},'Débil')),h('button',{class:'btn sm',disabled:!p,onclick:()=>lista('palabras','add',$('#pal').value,$('#tp').value==='1')},'Añadir')))}
+const vUsuarios=()=>h('div',{class:'card'},h('h3',null,'Perdonar a un usuario'),h('p',{class:'mut'},'Quita su silencio y borra sus avisos. Pega su ID (modo desarrollador de Discord > clic derecho en el usuario > Copiar ID).'),h('div',{class:'row'},h('input',{id:'uid',inputmode:'numeric',placeholder:'ID del usuario'}),h('button',{class:'btn sm',onclick:()=>accion(async()=>{const r=await api('/api/guild/'+S.gid+'/perdonar',{user_id:$('#uid').value.trim()});aviso(r.miembro?(r.silencio_quitado?r.miembro+' perdonado':'Avisos de '+r.miembro+' borrados (no pude quitar el silencio)'):'Avisos borrados; ese usuario no está en el servidor');$('#uid').value=''})},'Perdonar')));
+function logHtml(d){if(!d.canal)return[h('p',{class:'mut'},'Aún no hay canal de registro. Elígelo en la pestaña General.')];if(!d.mensajes.length)return[h('p',{class:'mut'},'# '+d.canal+': todavía no hay mensajes.')];
+ return[h('p',{class:'mut'},'# '+d.canal+' · se actualiza solo cada 6 s'),...d.mensajes.map(m=>h('div',{class:'msg'},h('div',{class:'mh'},h('b',null,m.autor),m.bot?h('span',{class:'bot'},'BOT'):null,h('small',null,new Date(m.ts*1000).toLocaleString('es'))),m.texto?h('p',null,m.texto):null,m.embeds.map(e=>h('div',{class:'emb',style:'border-color:#'+((e.color||0xe11d2e).toString(16).padStart(6,'0'))},e.titulo?h('b',null,e.titulo):null,e.texto?h('p',null,e.texto):null,e.campos.map(f=>h('p',null,h('b',null,f.n+': '),f.v))))))]}
+let timer=null;
+function vRegistro(){const box=h('div',{class:'log'},h('p',{class:'mut'},'Cargando…')),cargar=async()=>{try{box.replaceChildren(...logHtml(await api('/api/guild/'+S.gid+'/logs')))}catch(e){box.replaceChildren(h('p',{class:'mut'},e.message))}};
+ cargar();clearInterval(timer);timer=setInterval(()=>{if(S.tab==='registro'&&!S.pausa&&!document.hidden&&S.tok)cargar()},6000);
+ return h('div',null,h('div',{class:'row bar'},h('b',null,'Registro en vivo'),h('label',{class:'mut'},h('input',{type:'checkbox',onchange:e=>S.pausa=e.target.checked}),' Pausar'),h('button',{class:'btn ghost sm',onclick:cargar},'Actualizar')),box)}
+const TABS=[['general','General',vGeneral],['canales','Canales',vCanales],['dominios','Sitios',vDominios],['palabras','Palabras',vPalabras],['usuarios','Usuarios',vUsuarios],['registro','Registro',vRegistro]];
+function pintar(){const g=S.guilds.find(x=>x.id===S.gid),admin=g.nivel>=2,tabs=TABS.filter(t=>admin||['usuarios','registro'].includes(t[0]));if(!tabs.some(t=>t[0]===S.tab))S.tab=tabs[0][0];
+ $('#head').replaceChildren(h('h1',{style:'font-size:1.7rem;margin:0'},S.st.nombre),h('span',{class:'badge '+S.st.plan},{premium:'Premium',prueba:'Prueba',gratis:'Plan gratis'}[S.st.plan]));
+ $('#tabs').replaceChildren(...tabs.map(t=>h('button',{class:t[0]===S.tab?'on':'',onclick:()=>{S.tab=t[0];pintar()}},t[1])));
+ if(!admin)$('#head').append(h('span',{class:'mut'},'Acceso de staff: solo puedes perdonar y ver el registro.'));
+ $('#view').replaceChildren(tabs.find(t=>t[0]===S.tab)[2]());pintarSv()}
+function pintarSv(){const b=$('#servers');b.replaceChildren(...S.guilds.map(g=>h('button',{class:'sv'+(g.id===S.gid?' on':''),title:g.nombre,onclick:()=>elegir(g.id)},g.icono?h('img',{src:g.icono.replace(/\?.*$/,'')+'?size=64',alt:''}):h('span',{class:'ini'},g.nombre.slice(0,1).toUpperCase()),h('span',null,g.nombre))));if(!S.guilds.length)b.append(h('p',{class:'mut pad'},'No hay servidores donde el bot esté y seas administrador. Añade el bot a tu servidor.'))}
+const elegir=id=>accion(async()=>{S.st=await api('/api/guild/'+id);S.gid=id;pintar()});
+function salir(){S.tok=null;ss('removeItem','xs_tok');clearInterval(timer);$('#app').hidden=true;$('#who').hidden=true;$('#login').hidden=false}
+async function iniciar(){const hs=new URLSearchParams(location.hash.slice(1));if(hs.get('token')){S.tok=hs.get('token');ss('setItem','xs_tok',S.tok)}else S.tok=ss('getItem','xs_tok');
+ if(location.hash)history.replaceState(null,'',location.pathname+location.search);$('#go').href=API+'/api/login';$('#out').onclick=salir;
+ if(API.includes('TU-API')){$('#login').hidden=false;$('#go').hidden=true;$('#lmsg').textContent='Pega aquí la dirección HTTPS donde está funcionando tu bot (por ejemplo https://algo.trycloudflare.com). Se guarda en este navegador.';
+  const i=h('input',{placeholder:'https://tu-direccion.com',style:'margin:12px 0;width:100%'}),b=h('button',{class:'btn',onclick:()=>{const v=i.value.trim().replace(/\/+$/,'');if(!/^https:\/\/[^\s/]+$/.test(v)){aviso('Escribe una dirección que empiece por https:// y no tenga nada después del dominio',true);return}try{localStorage.setItem('xs_api',v)}catch(e){}location.reload()}},'Guardar y continuar');$('#login .card').append(i,b);return}
+ if(hs.get('error'))aviso('No se pudo iniciar sesión con Discord. Inténtalo otra vez.',true);
+ if(!S.tok){$('#login').hidden=false;if(GUARDADA)$('#login .card').append(h('p',{class:'mut'},h('a',{href:'#',onclick:e=>{e.preventDefault();try{localStorage.removeItem('xs_api')}catch(x){}location.reload()}},'Cambiar la dirección de la API')));return}
+ try{const d=await api('/api/me');S.guilds=d.servidores;$('#nm').textContent=d.usuario.nombre;if(d.usuario.avatar)$('#av').src=d.usuario.avatar;else $('#av').hidden=true;$('#who').hidden=false;$('#app').hidden=false;pintarSv();if(S.guilds.length)await elegir(S.guilds[0].id)}
+ catch(e){if(S.tok){aviso(e.message,true);$('#login').hidden=false;$('#lmsg').textContent=e.message}else $('#login').hidden=false}}
+iniciar();
+</script>
+</body>
+</html>

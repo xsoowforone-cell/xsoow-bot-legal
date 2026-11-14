@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XSOOW BOT, anti-spam para Discord en español</title>
+<meta name="description" content="Bot anti-spam para Discord: borra invitaciones, enlaces y estafas, avisa al usuario el motivo y deja el registro para tu staff. Plan gratis y Premium con 7 días de prueba.">
+<meta name="theme-color" content="#09090d">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XSOOW BOT, anti-spam para Discord en español">
+<meta property="og:description" content="Borra invitaciones, enlaces y estafas, le explica al usuario por qué y deja el registro para tu staff. Gratis para siempre y 7 días de Premium al añadirlo.">
+<meta property="og:locale" content="es_CO">
+<link rel="canonical" href="https://xsoowforone-cell.github.io/xsoow-bot-legal/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23e11d2e'/%3E%3Cpath d='M16 6l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V9z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M12 16.5l3 3 5-6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  :root {
+    --bg: #09090d;
+    --bg2: #101017;
+    --panel: #15151d;
+    --line: #2a2a35;
+    --text: #f4f4f6;
+    --muted: #a5a5b3;
+    --red: #e11d2e;
+    --red-hi: #ff4455;
+    --red-bg: #cf1029;
+    --display: "Inter Tight", "Segoe UI", system-ui, sans-serif;
+    --body: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; color-scheme: dark; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 1.0625rem/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 4px; }
+  code { font-family: var(--mono); font-size: .86em; background: rgba(255, 255, 255, .09); padding: .1em .4em; border-radius: 5px; white-space: nowrap; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .sr { position: absolute; left: -9999px; }
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: #fff; color: #000; padding: 10px 16px; border-radius: 8px; font-weight: 700; }
+  .skip:focus { top: 12px; }
+
+  .hudtag { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; font: 500 .8rem/1 var(--mono); letter-spacing: .08em; color: var(--muted); }
+  .chev { display: inline-flex; gap: 2px; }
+  .chev i { width: 10px; height: 13px; background: var(--red); clip-path: polygon(0 0, 55% 0, 100% 50%, 55% 100%, 0 100%, 45% 50%); }
+  .chev i.off { background: #3a3a46; }
+
+  .bar-top { position: sticky; top: 0; z-index: 20; background: rgba(9, 9, 13, .84); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font: 800 1.15rem/1 var(--display); text-decoration: none; letter-spacing: -.01em; }
+  .brand svg { width: 30px; height: 30px; }
+  .nav { display: flex; align-items: center; gap: 22px; }
+  .nav a { text-decoration: none; font-weight: 500; color: var(--muted); }
+  .nav a:hover { color: #fff; }
+  .btn { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 12px; background: var(--red); color: #fff; font: 700 1rem/1 var(--body); text-decoration: none; border: 0; transition: transform .15s, box-shadow .2s; }
+  .btn::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%); transform: translateX(-120%); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -8px rgba(225, 29, 46, .9); }
+  .btn:hover::after { transform: translateX(120%); transition: transform .6s; }
+  .nav .btn { min-height: 40px; padding: 0 18px; color: #fff; }
+  .nav .btn:hover { color: #fff; }
+
+  /* portada */
+  .hero-sec { position: relative; overflow: hidden; }
+  .hero-sec::before { content: ""; position: absolute; width: 640px; height: 640px; right: -160px; top: -200px; border-radius: 50%; background: var(--red); filter: blur(130px); opacity: .28; pointer-events: none; }
+  .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; align-items: center; padding: 56px 0 88px; }
+  h1 { font: 800 clamp(2.5rem, 5.2vw, 4.2rem)/1.02 var(--display); letter-spacing: -.03em; margin: 0 0 22px; max-width: 14ch; }
+  .lead { font-size: 1.18rem; color: #c4c4d0; max-width: 46ch; margin: 0 0 30px; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+  .cta .btn { min-height: 56px; padding: 0 32px; font-size: 1.05rem; box-shadow: 0 12px 36px -10px rgba(225, 29, 46, .85); }
+  .cta a.sec { font-weight: 700; text-underline-offset: 4px; }
+  .hint { margin: 18px 0 0; color: var(--muted); font-size: .95rem; max-width: 46ch; }
+  .proof { margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem; max-width: 46ch; }
+  .up { animation: entra .7s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--n, 0) * 110ms + 80ms); }
+  @keyframes entra { from { opacity: 0; transform: translateY(22px); } }
+
+  /* escenario tipo video */
+  .film { max-width: 430px; margin: 0 auto; width: 100%; }
+  .stage { position: relative; container-type: inline-size; aspect-ratio: 9 / 13.4; border-radius: 28px; overflow: hidden; background: #0b0b10; border: 1px solid var(--line); box-shadow: 0 40px 90px -30px rgba(225, 29, 46, .45); transition: background .5s; }
+  .stage[data-s="1"], .stage[data-s="4"] { background: var(--red-bg); }
+  .stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 70% at 50% 0, rgba(255, 255, 255, .1), transparent 60%); }
+  .hud { position: absolute; z-index: 5; top: 5.5%; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 2.6cqw; font: 500 max(10px, 2.6cqw)/1 var(--mono); letter-spacing: .08em; color: #fff; }
+  .hud .chev i { width: 2.4cqw; height: 3cqw; }
+  .stage[data-s="1"] .chev i:nth-child(-n+1), .stage[data-s="2"] .chev i:nth-child(-n+2), .stage[data-s="3"] .chev i:nth-child(-n+3), .stage[data-s="4"] .chev i:nth-child(-n+4) { background: var(--red); }
+  .stage[data-s="1"] .chev i:nth-child(-n+1), .stage[data-s="4"] .chev i:nth-child(-n+4) { background: #fff; }
+  .hud .chev i { background: rgba(255, 255, 255, .25); }
+
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+  .stage[data-s="1"] .s1, .stage[data-s="2"] .s2, .stage[data-s="3"] .s3, .stage[data-s="4"] .s4 { opacity: 1; visibility: visible; }
+  .big { position: absolute; left: 6%; right: 6%; top: 16%; margin: 0; text-align: center; font: 800 9.2cqw/1.08 var(--display); letter-spacing: -.02em; }
+  .big em { font-style: normal; background: #fff; color: #09090d; padding: 0 2cqw .4cqw; border-radius: 1.4cqw; }
+  .caps { position: absolute; left: 6%; right: 6%; bottom: 7%; height: 12cqw; display: grid; place-items: center; text-align: center; }
+  .capline { grid-area: 1 / 1; margin: 0; font: 600 5.4cqw/1.2 var(--display); color: #fff; opacity: 0; animation: capwin 2s var(--t, 0s) both; }
+  @keyframes capwin { 0% { opacity: 0; filter: blur(7px); transform: translateY(10px); } 18% { opacity: 1; filter: none; transform: none; } 82% { opacity: 1; filter: none; } 100% { opacity: 0; filter: blur(5px); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+  /* escena 1 */
+  .s1 .big { animation: rise .7s .1s both; }
+  .arena { position: absolute; left: 0; right: 0; top: 46%; height: 30%; }
+  .msgbar { position: absolute; left: 7%; right: 7%; top: 30%; display: flex; align-items: center; gap: 3cqw; padding: 3cqw 3.4cqw; background: #1f1f27; border-radius: 3cqw; font: 500 3.5cqw/1.3 var(--body); color: #e8e8ee; }
+  .msgbar .av { flex: none; width: 8cqw; height: 8cqw; border-radius: 50%; background: #b34a4a; display: grid; place-items: center; font: 800 3.8cqw/1 var(--display); }
+  .s1 .msgbar { animation: msgin .5s .5s both, msgout .5s 2s forwards; }
+  @keyframes msgin { from { opacity: 0; transform: translateY(16px); } }
+  @keyframes msgout { to { opacity: 0; transform: scale(.88) skewX(-8deg); filter: blur(5px); } }
+  .beam { position: absolute; left: 0; right: 0; top: 50%; height: .9cqw; background: #fff; box-shadow: 0 0 3cqw #fff; transform-origin: left; }
+  .s1 .beam { animation: beam .5s 1.7s both; }
+  @keyframes beam { 0% { transform: scaleX(0); opacity: 1; } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+  .burst i { position: absolute; left: 50%; top: 50%; width: 24cqw; height: .7cqw; background: #fff; border-radius: 99px; transform-origin: 0 50%; opacity: 0; }
+  .s1 .burst i { animation: shoot .6s 1.9s both; }
+  @keyframes shoot { 0% { opacity: 1; transform: rotate(var(--a)) translateX(2cqw) scaleX(0); } 40% { opacity: 1; transform: rotate(var(--a)) translateX(6cqw) scaleX(1); } 100% { opacity: 0; transform: rotate(var(--a)) translateX(18cqw) scaleX(.3); } }
+  .stamp { position: absolute; left: 50%; top: 50%; margin: -8cqw 0 0 -34cqw; width: 68cqw; text-align: center; padding: 2cqw 0 2.4cqw; background: #09090d; color: #fff; border: .9cqw solid #fff; border-radius: 2.4cqw; white-space: nowrap; font: 800 11.5cqw/1 var(--display); letter-spacing: .01em; transform: rotate(-7deg); }
+  .s1 .stamp { animation: slam .35s 2.35s cubic-bezier(.2, 1.6, .4, 1) both; }
+  @keyframes slam { from { opacity: 0; transform: rotate(-7deg) scale(3); } to { opacity: 1; transform: rotate(-7deg) scale(1); } }
+
+  /* escena 2 */
+  .flow { position: absolute; left: 6%; right: 6%; top: 17%; display: flex; align-items: center; justify-content: center; }
+  .pill { flex: none; display: inline-flex; align-items: center; gap: 1.8cqw; padding: 2.4cqw 4.4cqw; border-radius: 99px; border: .5cqw solid #3a3a46; background: #14141b; font: 700 4cqw/1 var(--body); }
+  .pill.hot { border-color: var(--red); box-shadow: 0 0 5cqw -1cqw rgba(225, 29, 46, .6); }
+  .pill b { width: 1.8cqw; height: 1.8cqw; border-radius: 50%; background: var(--red); }
+  .wire { position: relative; flex: 1; height: .5cqw; background: #3a3a46; min-width: 8cqw; }
+  .wire span { position: absolute; left: 50%; top: 50%; width: 9cqw; height: 9cqw; margin: -4.5cqw 0 0 -4.5cqw; border-radius: 50%; background: #14141b; border: .5cqw solid #3a3a46; display: grid; place-items: center; }
+  .wire svg { width: 4.6cqw; height: 4.6cqw; stroke: #fff; fill: none; stroke-width: 2; }
+  .s2 .flow { animation: rise .6s .1s both; }
+  .s2 .wire { animation: draw .7s .5s both; transform-origin: left; }
+  @keyframes draw { from { transform: scaleX(0); } }
+  .panel { position: absolute; left: 6%; right: 6%; background: var(--panel); border: 1px solid #2c2c37; border-radius: 4cqw; padding: 4cqw; }
+  .plabel { margin: 0 0 3cqw; font: 500 max(10px, 2.5cqw)/1 var(--mono); letter-spacing: .1em; color: var(--muted); }
+  .plabel::before { content: ""; display: inline-block; width: 1.4cqw; height: 1.4cqw; margin-right: 2cqw; border-radius: 50%; background: var(--red); vertical-align: middle; }
+  .how { top: 33%; }
+  .s2 .how { animation: rise .6s 1s both; }
+  .icons { display: flex; align-items: center; justify-content: space-between; }
+  .ico { display: grid; justify-items: center; gap: 2cqw; font: 500 max(10px, 2.4cqw)/1 var(--mono); letter-spacing: .08em; color: var(--muted); }
+  .ico svg { width: 11cqw; height: 11cqw; stroke: #fff; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .ico:nth-child(5) svg { stroke: var(--red-hi); }
+  .dash { flex: 1; height: 0; margin: 0 2cqw 5cqw; border-top: .5cqw dashed #4a4a58; }
+  .s2 .dash { animation: dashmove 1s linear infinite; }
+  @keyframes dashmove { to { border-top-color: var(--red-hi); } }
+  .chips { position: absolute; left: 6%; right: 6%; top: 66%; display: flex; flex-wrap: wrap; gap: 2cqw; justify-content: center; }
+  .chips span { padding: 2cqw 3.4cqw; border-radius: 99px; border: .4cqw solid #3a3a46; background: #14141b; font: 500 max(10px, 2.6cqw)/1 var(--mono); letter-spacing: .06em; color: #cfcfda; }
+  .s2 .chips span { animation: chipon .5s calc(2s + var(--k) * .55s) both; }
+  @keyframes chipon { from { border-color: #3a3a46; color: #cfcfda; } to { border-color: var(--red); color: #fff; background: rgba(225, 29, 46, .22); } }
+
+  /* escena 3 */
+  .steps3 { position: absolute; left: 4.5%; right: 4.5%; top: 14%; bottom: 20%; display: grid; gap: 2.6cqw; align-content: start; }
+  .steps3::before, .steps3::after { content: ""; position: absolute; width: 5cqw; height: 5cqw; border: .5cqw solid var(--red); pointer-events: none; }
+  .steps3::before { left: -2cqw; top: -2cqw; border-right: 0; border-bottom: 0; }
+  .steps3::after { right: -2cqw; bottom: -2cqw; border-left: 0; border-top: 0; }
+  .step { position: relative; background: var(--panel); border: 1px solid #2c2c37; border-radius: 3.4cqw; padding: 3.2cqw 3.6cqw; }
+  .s3 .step { animation: rise .6s calc(.2s + var(--k) * 2.1s) both; }
+  .step h4 { margin: 0 0 2.4cqw; font: 700 4.3cqw/1.2 var(--display); }
+  .step h4 code { font-size: .8em; }
+  .st-top { display: flex; justify-content: space-between; margin: 0 0 1.6cqw; font: 500 max(10px, 2.4cqw)/1 var(--mono); letter-spacing: .1em; color: var(--muted); }
+  .st-top b { font-weight: 500; color: var(--red-hi); opacity: 0; }
+  .s3 .st-top b { animation: aparece .4s calc(1.4s + var(--k) * 2.1s) both; }
+  @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
+  .row { display: flex; align-items: center; gap: 2.6cqw; padding: 1.4cqw 0; font: 500 3.5cqw/1.2 var(--body); color: #e6e6ee; }
+  .tick { flex: none; width: 4.6cqw; height: 4.6cqw; border-radius: 50%; border: .4cqw solid #4a4a58; display: grid; place-items: center; }
+  .tick::after { content: ""; width: 1.8cqw; height: 1cqw; border-left: .5cqw solid #fff; border-bottom: .5cqw solid #fff; transform: rotate(-45deg) translate(.1cqw, -.2cqw); opacity: 0; }
+  .s3 .tick { animation: tickbg .3s calc(.6s + var(--j) * .5s) both; }
+  .s3 .tick::after { animation: aparece .2s calc(.7s + var(--j) * .5s) both; }
+  @keyframes tickbg { to { background: var(--red); border-color: var(--red); } }
+  .row small { margin-left: auto; font: 500 max(10px, 2.6cqw)/1 var(--mono); color: var(--muted); }
+  .toggle { margin-left: auto; width: 10cqw; height: 5.6cqw; border-radius: 99px; background: #3a3a46; position: relative; }
+  .toggle::after { content: ""; position: absolute; left: .7cqw; top: .7cqw; width: 4.2cqw; height: 4.2cqw; border-radius: 50%; background: #fff; }
+  .s3 .toggle { animation: tgbg .3s .7s both; }
+  .s3 .toggle::after { animation: tgknob .3s .7s both; }
+  @keyframes tgbg { to { background: var(--red); } }
+  @keyframes tgknob { to { transform: translateX(4.4cqw); } }
+  .prog { height: 2cqw; border-radius: 99px; background: #2a2a35; overflow: hidden; margin-top: 2.2cqw; }
+  .prog i { display: block; height: 100%; width: 100%; border-radius: 99px; background: var(--red); transform-origin: left; }
+  .s3 .prog i { animation: fillbar 1.5s 4.8s both; }
+  @keyframes fillbar { from { transform: scaleX(0); } }
+
+  /* escena 4 */
+  .clock { position: absolute; left: 50%; top: 52%; width: 70cqw; height: 70cqw; margin: -35cqw 0 0 -35cqw; border-radius: 50%; border: 1cqw solid rgba(255, 255, 255, .85); }
+  .clock::before { content: ""; position: absolute; inset: 2.6cqw; border-radius: 50%; background: repeating-conic-gradient(rgba(255, 255, 255, .85) 0 1deg, transparent 1deg 30deg); -webkit-mask: radial-gradient(circle, transparent 74%, #000 75%); mask: radial-gradient(circle, transparent 74%, #000 75%); }
+  .hand { position: absolute; left: 50%; bottom: 50%; width: 1.2cqw; margin-left: -.6cqw; background: #fff; border-radius: 99px; transform-origin: 50% 100%; }
+  .hand.m { height: 28cqw; }
+  .hand.h { height: 18cqw; }
+  .s4 .hand.m { animation: spin 2.4s linear infinite; }
+  .s4 .hand.h { animation: spin 28.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .s4 .clock { animation: rise .7s .1s both; }
+  .num { position: absolute; left: 0; right: 0; top: 30%; text-align: center; font: 800 25cqw/1 var(--display); letter-spacing: -.04em; text-shadow: 0 .6cqw 4cqw rgba(0, 0, 0, .25); }
+  .s4 .num { animation: slam2 .6s .4s cubic-bezier(.2, 1.5, .4, 1) both; }
+  @keyframes slam2 { from { opacity: 0; transform: scale(1.6); } }
+  .num small { display: block; margin-top: 2cqw; font: 700 6cqw/1 var(--display); letter-spacing: 0; }
+  .endcard { position: absolute; inset: 0; background: #09090d; display: grid; align-content: center; justify-items: center; gap: 4.4cqw; text-align: center; padding: 8%; opacity: 0; }
+  .s4 .endcard { animation: aparece .6s 3.6s both; }
+  .endcard svg { width: 20cqw; height: 20cqw; }
+  .endcard h4 { margin: 0; font: 800 9cqw/1 var(--display); letter-spacing: -.02em; }
+  .endcard .tagbox { padding: 2.6cqw 6cqw 3cqw; background: var(--red); border-radius: 1.6cqw; font: 800 12cqw/1 var(--display); letter-spacing: -.01em; transform: rotate(-2deg); }
+  .endcard p { margin: 0; font: 500 4.2cqw/1.4 var(--body); color: #c4c4d0; }
+  .s4 .endcard svg, .s4 .endcard h4, .s4 .endcard .tagbox, .s4 .endcard p { animation: rise .6s calc(3.7s + var(--k) * .22s) both; }
+
+  .ctrl { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; }
+  .ctrl button { cursor: pointer; padding: 8px 12px; border-radius: 99px; border: 1px solid var(--line); background: transparent; font: 500 .8rem/1 var(--mono); letter-spacing: .04em; color: var(--muted); }
+  .ctrl button:hover { color: #fff; border-color: #55556a; }
+  .ctrl button[aria-current="true"] { color: #fff; border-color: var(--red); background: rgba(225, 29, 46, .16); }
+  .ctrl .pp { margin-left: 6px; }
+
+  /* secciones */
+  section.part { padding: 84px 0; }
+  section.part.alt { background: var(--bg2); }
+  section.part + section.part:not(.alt):not(.pl) { border-top: 1px solid var(--line); }
+  h2.t { font: 800 clamp(1.9rem, 3.6vw, 2.8rem)/1.06 var(--display); letter-spacing: -.025em; margin: 0 0 14px; max-width: 20ch; }
+  .intro { color: var(--muted); max-width: 54ch; margin: 0 0 40px; }
+  .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
+  .js .rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
+  .js .rv.in { opacity: 1; transform: none; }
+
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: paso; }
+  .steps li { position: relative; padding: 0 0 30px 62px; counter-increment: paso; }
+  .steps li::before { content: counter(paso); position: absolute; left: 0; top: -2px; width: 42px; height: 42px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font: 800 1.1rem/1 var(--display); box-shadow: 0 8px 20px -6px rgba(225, 29, 46, .7); }
+  .steps li::after { content: ""; position: absolute; left: 20px; top: 46px; bottom: 4px; width: 2px; background: linear-gradient(var(--red), var(--line)); }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li:last-child::after { display: none; }
+  .steps h3 { margin: 0 0 4px; font: 700 1.2rem/1.3 var(--display); }
+  .steps p { margin: 0; color: var(--muted); max-width: 52ch; }
+
+  .meter { background: #050508; border: 1px solid var(--line); border-radius: 18px; padding: 24px 24px 22px; }
+  .meter .lbl { margin: 0 0 12px; font: 500 .8rem/1 var(--mono); letter-spacing: .06em; color: var(--muted); }
+  .m-msg { margin: 0 0 18px; padding: 12px 14px; border-radius: 10px; background: rgba(255, 255, 255, .07); font-family: var(--mono); font-size: .85rem; line-height: 1.5; }
+  .sig { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 8px; }
+  .sig li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: rgba(225, 29, 46, .14); border: 1px solid rgba(225, 29, 46, .45); font-weight: 500; font-size: .96rem; }
+  .sig li::before { content: "!"; flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font: 800 .8rem/1 var(--display); }
+  .gauge { position: relative; height: 16px; border-radius: 99px; background: rgba(255, 255, 255, .1); }
+  .gauge i { display: block; height: 100%; width: 94%; border-radius: 99px; background: var(--red); }
+  .gauge .thr { position: absolute; left: 70%; top: -6px; bottom: -6px; width: 2px; background: #fff; }
+  .gauge-l { display: flex; justify-content: space-between; margin: 10px 0 0; font-size: .82rem; color: var(--muted); }
+  .gauge-l span:nth-child(2) { margin-left: 18%; color: #fff; }
+  .verdict { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); font: 700 1.05rem/1.3 var(--display); color: var(--red-hi); }
+  .js .meter:not(.in) .sig li, .js .meter:not(.in) .verdict { opacity: 0; transform: translateX(-14px); }
+  .js .meter:not(.in) .gauge i { width: 0; }
+  .js .meter.in .sig li { animation: sig-in .5s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--d) * 1s + .2s); }
+  .js .meter.in .gauge i { width: 0; animation: llena 2.6s .25s ease forwards; }
+  .js .meter.in .verdict { animation: sig-in .5s 2.8s both; }
+  @keyframes sig-in { from { opacity: 0; transform: translateX(-14px); } }
+  @keyframes llena { 0% { width: 0; background: #ffb020; } 30% { width: 30%; background: #ffb020; } 60% { width: 58%; background: #ff8a3d; } 100% { width: 94%; background: var(--red); } }
+
+  .detect { list-style: none; margin: 56px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .detect li { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto; gap: 8px 24px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .detect strong { font: 700 1.05rem/1.3 var(--display); }
+  .detect span { color: var(--muted); }
+  .tag { font: 700 .8rem/1 var(--body); color: #fff; background: var(--red); padding: 6px 11px; border-radius: 999px; white-space: nowrap; }
+  .tag.free { color: var(--muted); background: transparent; border: 1px solid var(--line); }
+
+  .tune { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; margin: 0; padding: 0; list-style: none; }
+  .tune li { padding: 14px 0; border-top: 1px solid var(--line); }
+  .tune li span { display: block; color: var(--muted); margin-top: 2px; }
+
+  .plans { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 40px; align-items: start; }
+  .plan { padding: 8px 0; }
+  .plan h3 { font: 800 1.9rem/1.1 var(--display); letter-spacing: -.02em; margin: 0 0 6px; }
+  .plan .sub { color: var(--muted); margin: 0 0 18px; }
+  .plan ul { margin: 0 0 24px; padding: 0; list-style: none; }
+  .plan li { padding: 9px 0 9px 28px; position: relative; border-top: 1px solid var(--line); }
+  .plan li::before { content: ""; position: absolute; left: 4px; top: 16px; width: 12px; height: 6px; border-left: 2.5px solid var(--red-hi); border-bottom: 2.5px solid var(--red-hi); transform: rotate(-45deg); }
+  .plan.free li::before { border-color: var(--muted); }
+  .plan.prem { position: relative; padding: 32px 32px 18px; border-radius: 22px; border: 2px solid transparent; background: linear-gradient(#15151d, #15151d) padding-box, linear-gradient(135deg, #e11d2e, #ff8a5c) border-box; box-shadow: 0 30px 70px -30px rgba(225, 29, 46, .6); }
+  .plan.prem .badge { position: absolute; top: -14px; right: 28px; padding: 6px 14px; border-radius: 99px; background: #fff; color: #09090d; font: 800 .82rem/1 var(--body); }
+  .prices { width: 100%; border-collapse: collapse; margin: 0 0 12px; }
+  .prices th, .prices td { text-align: left; padding: 12px 0; border-top: 1px solid var(--line); font-weight: 400; }
+  .prices th { font: 700 1.02rem/1.3 var(--display); }
+  .prices td:last-child { text-align: right; }
+  .prices b { font: 800 1.45rem/1 var(--display); }
+  .prices small { color: var(--muted); margin-left: 6px; }
+  .note { color: var(--muted); font-size: .95rem; margin: 0 0 14px; }
+  .trial { margin: 48px 0 0; padding: 26px 30px; background: var(--red-bg); color: #fff; border-radius: 18px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
+  .trial p { margin: 0; max-width: 52ch; }
+  .trial strong { font: 800 1.3rem/1.3 var(--display); display: block; margin-bottom: 2px; }
+  .trial .btn { background: #fff; color: #09090d; }
+  .trial .btn:hover { color: #09090d; box-shadow: 0 10px 30px -8px rgba(0, 0, 0, .5); }
+
+  .pay { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; margin-top: 64px; }
+  .pay h3 { font: 800 1.5rem/1.2 var(--display); letter-spacing: -.02em; margin: 0 0 10px; }
+  .pay p { color: var(--muted); margin: 0 0 12px; max-width: 48ch; }
+  .pay ol { margin: 0; padding-left: 22px; }
+  .pay ol li { padding: 6px 0 6px 6px; }
+  .pay ol li::marker { font-weight: 700; color: var(--red-hi); }
+
+  details { border-top: 1px solid var(--line); }
+  details:last-of-type { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 18px 40px 18px 0; position: relative; font: 700 1.1rem/1.35 var(--display); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 4px; top: 14px; font: 500 1.6rem/1 var(--body); color: var(--red-hi); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0 0 18px; color: var(--muted); max-width: 62ch; }
+  .faq { max-width: 800px; }
+
+  footer { padding: 44px 0 56px; background: #050508; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+  .foot { display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; align-items: center; }
+  .foot nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .foot a { text-underline-offset: 4px; }
+  .foot a:hover { color: #fff; }
+  .foot p { margin: 0; }
+
+
+  /* modulos con maquetas */
+  .mods h2.t { max-width: 22ch; }
+  .mod { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 56px; align-items: center; padding: 34px 0; }
+  .mod.rev .mod-t { order: 2; }
+  .mod-t h3 { margin: 0 0 10px; font: 800 1.7rem/1.1 var(--display); letter-spacing: -.02em; }
+  .mod-t p { margin: 0 0 14px; color: var(--muted); max-width: 44ch; }
+  .mod-t .tag { display: inline-block; margin-bottom: 14px; }
+  .mod-t a { font-weight: 700; text-underline-offset: 4px; color: #fff; }
+  .dc { background: #2b2d31; color: #dbdee1; border-radius: 16px; overflow: hidden; border: 1px solid #383a40; box-shadow: 0 30px 60px -34px rgba(225, 29, 46, .45); }
+  .dc-h { padding: 12px 16px; background: #232428; color: #949ba4; font-size: .9rem; }
+  .dc-h b { color: #dbdee1; }
+  .dc-b { padding: 16px; display: grid; gap: 14px; }
+  .dcm { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; }
+  .dav { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font: 800 1rem/1 var(--display); color: #fff; background: #b34a4a; }
+  .dav.bot { background: var(--red); }
+  .dcm .who { font-weight: 700; font-size: .96rem; }
+  .dcm .who i { font-style: normal; font-weight: 400; font-size: .78rem; color: #949ba4; margin-left: 8px; }
+  .dcm p { margin: 2px 0 0; font-size: .96rem; line-height: 1.45; }
+  .dcm .bt { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; background: #5865f2; color: #fff; font-size: .68rem; font-weight: 700; vertical-align: middle; }
+  .emb { margin-top: 6px; padding: 12px 14px; border-left: 4px solid var(--red); background: #232428; border-radius: 6px; font-size: .92rem; line-height: 1.5; }
+  .emb strong { display: block; margin-bottom: 4px; font-size: .95rem; }
+  .emb span { display: block; color: #b5bac1; }
+  .emb code { background: rgba(0, 0, 0, .3); }
+  .ladder { display: grid; gap: 8px; margin: 6px 0 0; padding: 0; list-style: none; }
+  .ladder li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: #232428; font-size: .94rem; }
+  .ladder li b { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #3a3c43; font: 800 .8rem/1 var(--display); }
+  .ladder li:nth-child(2) b { background: #b8741a; }
+  .ladder li:nth-child(3) b { background: var(--red); }
+  .imgcard { width: 100%; aspect-ratio: 16 / 7; border-radius: 8px; background: repeating-linear-gradient(45deg, #3b3d44 0 12px, #34363c 12px 24px); display: grid; place-items: center; color: #949ba4; font: 500 .8rem/1 var(--mono); letter-spacing: .06em; }
+  .final { background: var(--red-bg); color: #fff; padding: 92px 0; text-align: center; position: relative; overflow: hidden; }
+  .final::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 90% at 50% 0, rgba(255, 255, 255, .16), transparent 70%); }
+  .final .wrap { position: relative; }
+  .final h2 { margin: 0 0 14px; font: 800 clamp(2.2rem, 5vw, 3.8rem)/1.02 var(--display); letter-spacing: -.03em; }
+  .final p { margin: 0 auto 28px; max-width: 46ch; font-size: 1.15rem; color: rgba(255, 255, 255, .88); }
+  .final .btn { background: #fff; color: #09090d; min-height: 58px; padding: 0 36px; font-size: 1.08rem; }
+  .final .btn:hover { color: #09090d; box-shadow: 0 14px 36px -10px rgba(0, 0, 0, .55); }
+  .final small { display: block; margin-top: 18px; color: rgba(255, 255, 255, .8); }
+
+  @media (max-width: 900px) {
+    .mod { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 24px 0; }
+    .mod.rev .mod-t { order: 0; }
+    .hero, .split, .pay { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .hero { padding: 40px 0 64px; }
+    h1 { max-width: 16ch; }
+    section.part { padding: 60px 0; }
+    .plans { grid-template-columns: minmax(0, 1fr); }
+    .detect li { grid-template-columns: minmax(0, 1fr) auto; }
+    .detect li span { grid-column: 1 / -1; grid-row: 2; }
+    .tune { grid-template-columns: minmax(0, 1fr); }
+    .nav a.link { display: none; }
+    .detect { margin-top: 40px; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .cta .btn { width: 100%; }
+    .prices small { display: block; margin: 2px 0 0; }
+    .prices td:last-child { white-space: nowrap; }
+    .plan.prem { padding: 28px 20px 12px; }
+    .meter { padding: 20px 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js .rv { opacity: 1; transform: none; }
+    .js .meter:not(.in) .sig li, .js .meter:not(.in) .verdict { opacity: 1; transform: none; }
+    .js .meter:not(.in) .gauge i, .js .meter.in .gauge i { width: 94%; }
+    .s1 .msgbar, .s1 .beam, .s1 .burst { display: none; }
+    .capline { display: none; }
+    .capline:last-child { display: block; opacity: 1; }
+    .st-top b { opacity: 1; }
+    .tick { background: var(--red); border-color: var(--red); }
+    .tick::after { opacity: 1; }
+    .toggle { background: var(--red); }
+    .toggle::after { transform: translateX(4.4cqw); }
+    .endcard { opacity: 0; }
+    .ctrl .pp { display: none; }
+  }
+</style>
+<meta property="og:url" content="https://xsoowforone-cell.github.io/xsoow-bot-legal/">
+<meta property="og:site_name" content="XSOOW BOT">
+<meta property="og:image" content="https://xsoowforone-cell.github.io/xsoow-bot-legal/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="XSOOW BOT, anti-spam para Discord en español">
+<meta name="twitter:image" content="https://xsoowforone-cell.github.io/xsoow-bot-legal/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"XSOOW BOT","applicationCategory":"CommunicationApplication","operatingSystem":"Discord","inLanguage":"es","description":"Bot anti-spam para Discord en español.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style id="cine">
+:root{--e:cubic-bezier(.2,.8,.2,1)}
+html{scrollbar-gutter:stable;scrollbar-width:thin;scrollbar-color:#e11d2e #101017}
+html.sm,html.lenis{scroll-behavior:auto!important}
+html.lenis body{height:auto}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;transition:opacity .5s}
+main{overflow-x:clip}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+section.part.alt{background:rgba(16,16,23,.74)}
+#cp{position:fixed;left:0;top:0;height:3px;width:100%;z-index:102;background:linear-gradient(90deg,var(--red),#ff8a95);transform:scaleX(0);transform-origin:0 50%}
+.lb{position:fixed;left:0;right:0;height:12vh;background:#000;z-index:101;pointer-events:none;animation:lbt 1.4s .25s cubic-bezier(.7,0,.2,1) forwards}
+.lb.b{bottom:0;animation-name:lbb}.lb.t{top:0}
+@keyframes lbt{to{transform:translateY(-101%)}}@keyframes lbb{to{transform:translateY(101%)}}
+.grain{position:fixed;inset:-6%;z-index:99;pointer-events:none;opacity:.06;background-size:128px;animation:gr .5s steps(5) infinite}
+@keyframes gr{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}}
+.spot{position:fixed;inset:0;z-index:98;pointer-events:none;overflow:hidden;background:radial-gradient(130% 100% at 50% 45%,transparent 58%,rgba(0,0,0,.5))}
+.spot i{position:absolute;left:-350px;top:-350px;width:700px;height:700px;border-radius:50%;background:radial-gradient(closest-side,rgba(225,29,46,.14),transparent);transform:translate3d(50vw,25vh,0)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+.w>i{display:inline-block;font-style:normal;transform:translateY(105%);opacity:0;animation:wu .9s var(--e) both;animation-delay:calc(1.15s + var(--k) * .08s)}
+@keyframes wu{to{transform:none;opacity:1}}
+.mq{overflow:hidden;padding:24px 0;margin:36px 0;border-block:1px solid var(--line);background:rgba(9,9,13,.6)}
+.mq div{display:flex;width:max-content;animation:mq 34s linear infinite}
+.mq div+div{animation-direction:reverse;animation-duration:44s;margin-top:6px}
+.mq span{font:800 clamp(1.8rem,5vw,3.4rem)/1.1 var(--display);letter-spacing:-.02em;padding:0 .5em;white-space:nowrap}
+.mq div+div span{color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.6)}
+.mq span::after{content:"✕";color:var(--red);-webkit-text-stroke:0;font-size:.5em;padding-left:1em;vertical-align:.25em}
+@keyframes mq{to{transform:translateX(-50%)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:1080px;margin:0 auto;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.stat{background:rgba(16,16,23,.88);padding:26px 22px}
+.stat b{display:block;font:800 clamp(2.4rem,5vw,3.8rem)/1 var(--display);letter-spacing:-.03em}
+.stat span{color:var(--muted);font-size:.95rem}
+.cmds{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:26px}
+.cmd{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(21,21,29,.82)}
+.cmd.pr{border-color:rgba(225,29,46,.55)}
+.cmd code{font-size:1rem;background:rgba(225,29,46,.16);color:#ffb3ba}
+.cmd em{float:right;font:700 .7rem/1 var(--mono);font-style:normal;color:#fff;background:var(--red);padding:5px 8px;border-radius:99px}
+.cmd p{margin:10px 0 0;color:var(--muted);font-size:.95rem;line-height:1.45}
+.sup{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:26px}
+.sup>div{border:1px solid var(--line);border-radius:16px;padding:24px;background:rgba(21,21,29,.82)}
+.sup h3{margin:0 0 8px;font:700 1.2rem/1.2 var(--display)}.sup p{margin:0 0 16px;color:var(--muted)}
+.rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px}
+.rail a{position:relative;width:10px;height:10px;border-radius:50%;background:#555563;transition:background .25s,transform .25s}
+.rail a.on{background:var(--red-hi);transform:scale(1.5)}
+.rail a::after{content:attr(data-l);position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;font:500 .75rem var(--mono);color:#fff;background:rgba(0,0,0,.8);padding:4px 8px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s}
+.rail a:hover::after,.rail a:focus-visible::after{opacity:1}
+.fxb{position:fixed;left:14px;bottom:14px;z-index:103;font:500 .72rem var(--mono);color:#cfcfda;background:rgba(9,9,13,.85);border:1px solid var(--line);border-radius:99px;padding:7px 12px;cursor:pointer}
+.fxb:hover{border-color:var(--red)}
+html.lite .grain,html.lite .spot{display:none}
+section.part{position:relative}
+section.part+section.part::before{content:"";position:absolute;left:50%;top:0;width:min(1040px,86vw);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(225,29,46,.7),transparent)}
+@media(max-width:1100px){.rail{display:none}}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.mq div,.grain{animation:none}.lb{display:none}.w>i{animation:none;transform:none;opacity:1}}
+</style>
+</head>
+<body>
+<a class="skip" href="#detecta">Saltar al contenido</a>
+
+<div class="bar-top">
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#inicio" aria-label="XSOOW BOT, inicio">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#e11d2e"/><path d="M16 6l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V9z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 16.5l3 3 5-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        XSOOW BOT
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a class="link" href="#modulos">Funciones</a>
+        <a class="link" href="#detecta">Qué detecta</a>
+        <a class="link" href="#empezar">Cómo empezar</a>
+        <a class="link" href="#comandos">Comandos</a>
+        <a class="link" href="#planes">Planes</a>
+        <a class="link" href="#preguntas">Preguntas</a>
+        <a class="link" href="panel.html">Panel</a>
+        <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1562932609909264404&amp;scope=bot%20applications.commands&amp;permissions=1099511720964">Añadir a Discord</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<main id="inicio">
+  <div class="hero-sec">
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <h1 class="up" style="--n:0">Frena el spam de tu servidor antes de que lo vea tu comunidad</h1>
+          <p class="lead up" style="--n:1">XSOOW BOT borra invitaciones, enlaces y estafas, le explica al usuario por qué y deja el registro para tu staff. Está en español y se configura con un comando.</p>
+          <div class="cta up" style="--n:2">
+            <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1562932609909264404&amp;scope=bot%20applications.commands&amp;permissions=1099511720964">Añadir a Discord</a>
+            <a class="sec" href="#planes">Ver planes</a>
+          </div>
+          <p class="hint up" style="--n:3">Gratis para siempre. Al añadirlo tienes 7 días de Premium completo.</p>
+          <p class="proof up" style="--n:4">En uso en XSCraft, una comunidad de Minecraft con más de 800 miembros.</p>
+        </div>
+
+        <div class="film up" style="--n:3">
+          <div class="stage" id="stage" data-s="1" role="img" aria-label="Video corto en bucle en cuatro capítulos: 1, el spam se borra antes de llegar; 2, el bot lee cada mensaje y suma señales; 3, se configura en tres pasos; 4, siete días de Premium gratis.">
+            <div class="hud" aria-hidden="true"><span class="chev"><i></i><i></i><i></i><i></i></span><span id="hudt">[01/04 — EL CAMBIO]</span></div>
+
+            <div class="scene s1" aria-hidden="true">
+              <p class="big">El spam acaba de<br>dejar de <em>llegar</em></p>
+              <div class="arena">
+                <div class="msgbar"><b class="av">N</b><span>Gana 300 USD diarios sin invertir. discord.gg/gana-ya</span></div>
+                <div class="beam"></div>
+                <div class="burst"><i style="--a:-70deg"></i><i style="--a:-40deg"></i><i style="--a:-12deg"></i><i style="--a:14deg"></i><i style="--a:42deg"></i><i style="--a:72deg"></i><i style="--a:110deg"></i><i style="--a:150deg"></i><i style="--a:190deg"></i><i style="--a:230deg"></i></div>
+                <div class="stamp">BORRADO</div>
+              </div>
+              <div class="caps"><p class="capline" style="--t:.4s">XSOOW BOT</p><p class="capline" style="--t:2.3s">lo borra antes de</p><p class="capline" style="--t:4.1s">que lo vea tu comunidad.</p></div>
+            </div>
+
+            <div class="scene s2" aria-hidden="true">
+              <div class="flow">
+                <span class="pill"><b></b>Mensaje</span>
+                <span class="wire"><span><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1"/></svg></span></span>
+                <span class="pill hot"><b></b>XSOOW BOT</span>
+              </div>
+              <div class="panel how">
+                <p class="plabel">CÓMO DECIDE</p>
+                <div class="icons">
+                  <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>MENSAJE</div>
+                  <span class="dash"></span>
+                  <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/></svg>SEÑALES</div>
+                  <span class="dash"></span>
+                  <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 2.6v5.6c0 4.4-3 7.8-7 9.8-4-2-7-5.4-7-9.8V5.6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.6"/></svg>BORRADO</div>
+                </div>
+              </div>
+              <div class="chips"><span style="--k:0">INVITES</span><span style="--k:1">ENLACES</span><span style="--k:2">ESTAFAS</span><span style="--k:3">DOMINIOS</span></div>
+              <div class="caps"><p class="capline" style="--t:.5s">XSOOW BOT lee</p><p class="capline" style="--t:2.4s">cada mensaje</p><p class="capline" style="--t:4.3s">y suma señales.</p></div>
+            </div>
+
+            <div class="scene s3" aria-hidden="true">
+              <div class="steps3">
+                <div class="step" style="--k:0">
+                  <div class="st-top"><span>PASO 01</span><b>LISTO</b></div>
+                  <h4>Añade el bot</h4>
+                  <div class="row">XSOOW BOT · tu servidor<span class="toggle"></span></div>
+                </div>
+                <div class="step" style="--k:1">
+                  <div class="st-top"><span>PASO 02</span><b>LISTO</b></div>
+                  <h4>Escribe <code>/setup</code></h4>
+                  <div class="row"><span class="tick" style="--j:5"></span>canal de logs elegido</div>
+                  <div class="row"><span class="tick" style="--j:6"></span>modo prueba activo</div>
+                </div>
+                <div class="step" style="--k:2">
+                  <div class="st-top"><span>PASO 03</span><b>LISTO</b></div>
+                  <h4>Actívalo de verdad</h4>
+                  <div class="row"><code>/prueba activar:No</code></div>
+                  <div class="prog"><i></i></div>
+                </div>
+              </div>
+              <div class="caps"><p class="capline" style="--t:.5s">añade el bot,</p><p class="capline" style="--t:2.6s">escribe /setup</p><p class="capline" style="--t:4.8s">y actívalo.</p></div>
+            </div>
+
+            <div class="scene s4" aria-hidden="true">
+              <div class="clock"><span class="hand h"></span><span class="hand m"></span></div>
+              <div class="num">7 días<small>de Premium completo</small></div>
+              <div class="endcard">
+                <svg viewBox="0 0 32 32" style="--k:0"><rect width="32" height="32" rx="8" fill="#e11d2e"/><path d="M16 6l8 3v7c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V9z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 16.5l3 3 5-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <h4 style="--k:1">XSOOW BOT</h4>
+                <div class="tagbox" style="--k:2">AÑÁDELO</div>
+                <p style="--k:3">Gratis para siempre.<br>Premium si lo quieres.</p>
+              </div>
+            </div>
+          </div>
+          <div class="ctrl" role="group" aria-label="Capítulos del video">
+            <button type="button" data-go="1" aria-current="true">01 El cambio</button>
+            <button type="button" data-go="2">02 Detector</button>
+            <button type="button" data-go="3">03 Pasos</button>
+            <button type="button" data-go="4">04 Prueba</button>
+            <button type="button" class="pp" id="pp" aria-pressed="false">Pausar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="sr">Lo que XSOOW BOT detiene: free nitro, airdrop, casino, gana dinero, invitaciones, enlaces acortados, dominios falsos, menciones masivas, imágenes de spam. Lo que hace: borra, avisa, registra, silencia, banea.</p>
+<div class="mq" aria-hidden="true"><div><span>free nitro</span><span>airdrop</span><span>casino</span><span>gana dinero</span><span>invitaciones</span><span>enlaces acortados</span><span>dominios falsos</span><span>menciones masivas</span><span>imágenes de spam</span><span>free nitro</span><span>airdrop</span><span>casino</span><span>gana dinero</span><span>invitaciones</span><span>enlaces acortados</span><span>dominios falsos</span><span>menciones masivas</span><span>imágenes de spam</span></div><div><span>borra</span><span>avisa</span><span>registra</span><span>silencia</span><span>banea</span><span>borra</span><span>avisa</span><span>registra</span><span>silencia</span><span>banea</span></div></div>
+<section class="part" style="padding:34px 0 0"><div class="wrap"><div class="stats"><div class="stat rv"><b data-n="7">7</b><span>días de Premium al añadir el bot</span></div><div class="stat rv" style="--i:1"><b data-n="48">48</b><span>horas para pedir reembolso</span></div><div class="stat rv" style="--i:2"><b data-n="30">30</b><span>días se guardan los avisos</span></div><div class="stat rv" style="--i:3"><b data-n="3">3</b><span>pasos para empezar</span></div></div></div></section>
+  <section class="part mods" id="modulos">
+    <div class="wrap">
+      <h2 class="t rv">Mira cómo trabaja en tu servidor</h2>
+      <p class="intro rv">Así se ve cada función en Discord, con mensajes de ejemplo.</p>
+
+      <div class="mod">
+        <div class="mod-t rv">
+          <span class="tag free">Gratis</span>
+          <h3>Borra invitaciones y estafas</h3>
+          <p>El mensaje desaparece y tu staff recibe el motivo en el canal de registro, con el usuario y el canal donde lo escribió.</p>
+          <a href="#detecta">Ver qué detecta</a>
+        </div>
+        <div class="dc rv" style="--i:1" aria-label="Ejemplo de registro del bot en un canal de staff">
+          <div class="dc-h"># <b>logs-staff</b></div>
+          <div class="dc-b">
+            <div class="dcm"><div class="dav bot">X</div><div><div class="who">XSOOW BOT<span class="bt">BOT</span><i>hoy 15:03</i></div>
+              <div class="emb"><strong>Mensaje eliminado</strong><span>Usuario: <code>nuevo_user_88</code> en <code>#general</code></span><span>Motivo: invitación a otro servidor, promesa de dinero</span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mod rev">
+        <div class="mod-t rv">
+          <span class="tag free">Gratis</span>
+          <h3>Le explica al usuario qué pasó</h3>
+          <p>Llega un aviso por privado con el motivo, sin sorpresas. Si fue un error, sabe que puede hablar con un moderador.</p>
+          <a href="#falsos">Ver controles contra errores</a>
+        </div>
+        <div class="dc rv" style="--i:1" aria-label="Ejemplo de mensaje privado del bot">
+          <div class="dc-h">@ <b>XSOOW BOT</b></div>
+          <div class="dc-b">
+            <div class="dcm"><div class="dav bot">X</div><div><div class="who">XSOOW BOT<span class="bt">BOT</span><i>hoy 15:03</i></div>
+              <p>Tu mensaje en <b>XSCraft</b> fue eliminado porque parecía spam.</p>
+              <div class="emb"><strong>Motivo</strong><span>Invitación a otro servidor, promesa de dinero.</span><span>Si fue un error, avisa a un moderador.</span></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mod">
+        <div class="mod-t rv">
+          <span class="tag">Premium</span>
+          <h3>El castigo sube si reincide</h3>
+          <p>El bot pasa solo de borrar y avisar a silenciar y banear según los puntos y la reincidencia. Tú decides desde cuántos puntos banear.</p>
+          <a href="#planes">Ver Premium</a>
+        </div>
+        <div class="dc rv" style="--i:1" aria-label="Ejemplo de cómo sube el castigo">
+          <div class="dc-h"># <b>logs-staff</b></div>
+          <div class="dc-b">
+            <div class="dcm"><div class="dav bot">X</div><div><div class="who">XSOOW BOT<span class="bt">BOT</span><i>hoy 15:21</i></div>
+              <p>Castigo para <code>nuevo_user_88</code>:</p>
+              <ul class="ladder"><li><b>1</b>Mensaje borrado y aviso por privado</li><li><b>2</b>Silencio si reincide</li><li><b>3</b>Baneo si sigue</li></ul></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mod rev">
+        <div class="mod-t rv">
+          <span class="tag">Premium</span>
+          <h3>Reconoce imágenes de spam</h3>
+          <p>Cuando confirmas una imagen como spam, el bot la aprende y borra las parecidas aunque cambie el texto.</p>
+          <a href="#detecta">Ver todas las detecciones</a>
+        </div>
+        <div class="dc rv" style="--i:1" aria-label="Ejemplo de imagen de spam reconocida">
+          <div class="dc-h"># <b>general</b></div>
+          <div class="dc-b">
+            <div class="dcm"><div class="dav">N</div><div><div class="who">nuevo_user_88<i>hoy 15:40</i></div><div class="imgcard">IMAGEN</div></div></div>
+            <div class="dcm"><div class="dav bot">X</div><div><div class="who">XSOOW BOT<span class="bt">BOT</span><i>hoy 15:40</i></div>
+              <div class="emb"><strong>Imagen eliminada</strong><span>Parecida a una imagen de spam ya confirmada.</span></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part alt" id="detecta">
+    <div class="wrap">
+      <div class="split">
+        <div class="rv">
+          <p class="hudtag"><span class="chev"><i></i><i></i><i class="off"></i><i class="off"></i></span>[02/04 — EL DETECTOR]</p>
+          <h2 class="t">Qué detecta</h2>
+          <p class="intro">Cada mensaje suma puntos según sus señales. Nada se borra por una sola palabra suelta: solo actúa cuando las señales pasan el umbral.</p>
+        </div>
+        <div class="meter" id="meter" aria-label="Ejemplo ilustrativo de cómo se suman las señales hasta pasar el umbral">
+          <p class="lbl">EJEMPLO ILUSTRATIVO</p>
+          <p class="m-msg">Gana 300 USD diarios sin invertir. Entra ya: discord.gg/gana-ya</p>
+          <ul class="sig">
+            <li style="--d:.2">Invitación a otro servidor</li>
+            <li style="--d:.9">Promesa de dinero fácil</li>
+            <li style="--d:1.6">Enlace que no está en tu lista</li>
+          </ul>
+          <div class="gauge" aria-hidden="true"><i></i><span class="thr"></span></div>
+          <div class="gauge-l" aria-hidden="true"><span>Puntos</span><span>Umbral</span><span></span></div>
+          <p class="verdict">Pasa el umbral: mensaje borrado y aviso al usuario</p>
+        </div>
+      </div>
+      <ul class="detect">
+        <li class="rv" style="--i:0"><strong>Invitaciones a otros servidores</strong><span>Enlaces de Discord, Telegram y WhatsApp que no son del tuyo.</span><em class="tag free">Gratis</em></li>
+        <li class="rv" style="--i:1"><strong>Enlaces no permitidos</strong><span>Acortadores, dominios sospechosos y sitios que no están en tu lista.</span><em class="tag free">Gratis</em></li>
+        <li class="rv" style="--i:2"><strong>Estafas típicas</strong><span>Casino, Nitro gratis, falsos sorteos y promesas de dinero fácil.</span><em class="tag free">Gratis</em></li>
+        <li class="rv" style="--i:3"><strong>Silencio y baneo automáticos</strong><span>El castigo crece si el usuario reincide. Tú eliges desde cuántos puntos banear.</span><em class="tag">Premium</em></li>
+        <li class="rv" style="--i:4"><strong>Imágenes de spam</strong><span>Reconoce imágenes parecidas y aprende las nuevas cuando se confirma el spam.</span><em class="tag">Premium</em></li>
+        <li class="rv" style="--i:5"><strong>Dominios falsos</strong><span>Detecta sitios que imitan a Discord o Steam con letras parecidas, como la «а» rusa.</span><em class="tag">Premium</em></li>
+        <li class="rv" style="--i:6"><strong>Ráfagas y mensajes repetidos</strong><span>Muchos mensajes seguidos o el mismo mensaje en varios canales cuentan como un solo incidente.</span><em class="tag">Premium</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="part" id="empezar">
+    <div class="wrap split">
+      <div class="rv">
+        <p class="hudtag"><span class="chev"><i></i><i></i><i></i><i class="off"></i></span>[03/04 — LOS 3 PASOS]</p>
+        <h2 class="t">Listo en tres pasos</h2>
+        <p class="intro">Arranca en modo prueba: avisa pero no castiga, para que veas cómo acierta antes de dejarlo actuar.</p>
+      </div>
+      <ol class="steps">
+        <li class="rv" style="--i:0">
+          <h3>Añade el bot</h3>
+          <p>Elige tu servidor en el enlace de invitación. Necesitas permiso para administrar el servidor.</p>
+        </li>
+        <li class="rv" style="--i:1">
+          <h3>Escribe <code>/setup</code></h3>
+          <p>Con <code>/setup logs:#canal-del-staff</code> eliges un canal privado donde el bot deja el registro de cada detección.</p>
+        </li>
+        <li class="rv" style="--i:2">
+          <h3>Actívalo de verdad</h3>
+          <p>Revisa el registro unos días. Cuando estés conforme, escribe <code>/prueba activar:No</code> y empieza a borrar y castigar.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="part alt" id="falsos">
+    <div class="wrap split">
+      <div class="rv">
+        <h2 class="t">Si borra algo que no debía</h2>
+        <p class="intro">Ningún bot acierta siempre. Por eso tú tienes el control.</p>
+      </div>
+      <ul class="tune">
+        <li class="rv" style="--i:0"><code>/dominio</code><span>Permite un sitio web para todo el servidor.</span></li>
+        <li class="rv" style="--i:1"><code>/canal-libre</code><span>Deja enlaces e imágenes en un canal, como el de memes.</span></li>
+        <li class="rv" style="--i:2"><code>/perdonar</code><span>Quita el silencio a alguien y borra sus avisos.</span></li>
+        <li class="rv" style="--i:3"><code>/sensibilidad</code><span>Elige entre bajo, medio y alto según qué tan estricto lo quieras.</span></li>
+        <li class="rv" style="--i:4"><code>/staff</code><span>Decide si el bot también vigila a tu equipo.</span></li>
+        <li class="rv" style="--i:5"><code>/prueba</code><span>Vuelve al modo que solo avisa, sin borrar ni castigar.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="part" id="comandos"><div class="wrap">
+<h2 class="t rv">Todos los comandos</h2>
+<p class="intro rv">Se escriben dentro de Discord. Los de Premium funcionan con ese plan o durante los 7 días de prueba.</p>
+<div class="cmds"><div class="cmd rv" style="--i:0"><code>/setup</code><p>Configura el bot y elige el canal de registro</p></div><div class="cmd rv" style="--i:1"><code>/estado</code><p>Muestra la configuración y los permisos</p></div><div class="cmd rv" style="--i:2"><code>/prueba</code><p>Modo prueba: solo avisa, no borra ni castiga</p></div><div class="cmd rv" style="--i:0"><code>/staff</code><p>Decide si el bot también vigila a tu equipo</p></div><div class="cmd rv" style="--i:1"><code>/sensibilidad</code><p>Qué tan estricto es: bajo, medio o alto</p></div><div class="cmd rv" style="--i:2"><code>/canal-libre</code><p>Permite enlaces e imágenes en un canal</p></div><div class="cmd rv" style="--i:0"><code>/dominio</code><p>Permite o quita un sitio de la lista de enlaces</p></div><div class="cmd rv" style="--i:1"><code>/vigilar-todos</code><p>Vuelve a vigilar todo el servidor</p></div><div class="cmd rv" style="--i:2"><code>/perdonar</code><p>Quita el silencio y borra los avisos de alguien</p></div><div class="cmd rv" style="--i:0"><code>/premium info</code><p>Tu plan actual, qué incluye y los precios</p></div><div class="cmd rv" style="--i:1"><code>/premium pay</code><p>Cómo pagar y tu ID de servidor</p></div><div class="cmd rv" style="--i:2"><code>/ayuda</code><p>La lista de comandos dentro de Discord</p></div></div>
+<h3 class="rv" style="margin:44px 0 0;font:700 1.3rem var(--display)">Solo en Premium</h3>
+<div class="cmds"><div class="cmd pr rv" style="--i:0"><em>Premium</em><code>/vigilar</code><p>Elige en qué canales o categorías actúa</p></div><div class="cmd pr rv" style="--i:1"><em>Premium</em><code>/palabra</code><p>Añade o quita palabras de spam propias</p></div><div class="cmd pr rv" style="--i:2"><em>Premium</em><code>/baneo</code><p>Activa el baneo automático para spam grave</p></div><div class="cmd pr rv" style="--i:0"><em>Premium</em><code>/castigo</code><p>Minutos de silencio base; crecen si reincide</p></div></div>
+</div></section>
+
+  <section class="part alt" id="panel"><div class="wrap">
+<h2 class="t rv">Tu bot, desde la web</h2>
+<p class="intro rv">Entra con Discord y administra el bot sin escribir comandos. Solo ves los servidores donde tienes permiso.</p>
+<div class="cmds">
+<div class="cmd rv"><code>Ajustes</code><p>Modo prueba, sensibilidad, canal de registro y castigos con un clic.</p></div>
+<div class="cmd rv" style="--i:1"><code>Listas</code><p>Canales libres o vigilados, sitios permitidos y palabras propias.</p></div>
+<div class="cmd rv" style="--i:2"><code>Registro en vivo</code><p>Mira lo que detecta el bot en el canal de logs, sin abrir Discord.</p></div>
+</div>
+<p style="margin-top:26px"><a class="btn" href="panel.html">Abrir el panel</a></p>
+</div></section>
+
+  <section class="part pl" id="planes">
+    <div class="wrap">
+      <p class="hudtag rv"><span class="chev"><i></i><i></i><i></i><i></i></span>[04/04 — EL SIGUIENTE NIVEL]</p>
+      <h2 class="t rv">Planes</h2>
+      <p class="intro rv">El plan gratis no caduca. Premium se paga por servidor y no se renueva solo.</p>
+
+      <div class="plans">
+        <div class="plan free rv">
+          <h3>Gratis</h3>
+          <p class="sub">Para frenar el spam básico.</p>
+          <ul>
+            <li>Borra invitaciones, enlaces y estafas</li>
+            <li>Avisa al usuario con el motivo</li>
+            <li>Deja registro para tu staff</li>
+            <li>Todos los controles contra falsos positivos</li>
+          </ul>
+        </div>
+        <div class="plan prem rv" style="--i:1">
+          <span class="badge">7 días gratis</span>
+          <h3>Premium</h3>
+          <p class="sub">Para que el bot trabaje solo.</p>
+          <ul>
+            <li>Todo lo del plan gratis</li>
+            <li>Silencio y baneo automáticos que crecen si reincide</li>
+            <li>Reconoce y aprende imágenes de spam</li>
+            <li>Dominios falsos, ráfagas y mensajes repetidos</li>
+            <li>Palabras propias y canales vigilados a tu elección</li>
+            <li>Soporte directo</li>
+          </ul>
+          <table class="prices">
+            <caption class="sr">Precios por servidor</caption>
+            <tr><th scope="row">1 mes</th><td><b>US$1.99</b><small>unos 8.000 COP</small></td></tr>
+            <tr><th scope="row">6 meses</th><td><b>US$9.99</b><small>unos 40.000 COP</small></td></tr>
+            <tr><th scope="row">1 año</th><td><b>US$17.99</b><small>unos 72.000 COP</small></td></tr>
+          </table>
+          <p class="note">Precios por servidor. Los pesos son aproximados.</p>
+        </div>
+      </div>
+
+      <div class="trial rv">
+        <p><strong>7 días de Premium completo al añadir el bot</strong>Se da una sola vez por servidor. Al terminar, el servidor pasa al plan gratis.</p>
+        <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1562932609909264404&amp;scope=bot%20applications.commands&amp;permissions=1099511720964">Añadir a Discord</a>
+      </div>
+
+      <div class="pay">
+        <div class="rv">
+          <h3>Cómo pagar Premium</h3>
+          <p>El pago y la activación son manuales: una persona revisa que el dinero haya llegado antes de activar tu plan. No es inmediato.</p>
+        </div>
+        <ol class="rv" style="--i:1">
+          <li>En tu servidor escribe <code>/premium pay</code>. Te muestra los planes y tu ID de servidor.</li>
+          <li>Paga por Nequi (Colombia) al número que aparece ahí. Fuera de Colombia, escribe a XSoow y te indica otro medio de pago.</li>
+          <li>Envía el comprobante, el ID del servidor y el plan a XSoow con el botón de ese mismo mensaje.</li>
+          <li>Cuando se confirme el pago, se activa Premium en tu servidor.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="part alt" id="preguntas">
+    <div class="wrap">
+      <h2 class="t rv">Preguntas frecuentes</h2>
+      <div class="faq rv">
+        <details>
+          <summary>¿Qué permisos necesita el bot?</summary>
+          <p>Ver canales, enviar mensajes, insertar enlaces, leer el historial, administrar mensajes y moderar miembros. Para banear automáticamente, también banear miembros. Su rol tiene que estar por encima de los roles que debe poder moderar.</p>
+        </details>
+        <details>
+          <summary>¿Guarda mis mensajes?</summary>
+          <p>No. Los mensajes y archivos se analizan en memoria y no se guardan. El bot solo guarda la configuración del servidor, los avisos por 30 días y un número que representa cada imagen confirmada como spam. Todo está explicado en la <a href="privacidad.html">política de privacidad</a>.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa cuando termina la prueba de 7 días?</summary>
+          <p>El servidor pasa al plan gratis y no pierdes tu configuración. El bot te avisa un día antes y al terminar. Si quieres volver a Premium, contratas un plan con <code>/premium pay</code>.</p>
+        </details>
+        <details>
+          <summary>¿Puedo pedir un reembolso?</summary>
+          <p>Sí, dentro de las 48 horas siguientes a la activación de Premium en tu servidor, en cualquier plan. Escribe a XSoow con el ID del servidor y el comprobante.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto tarda en activarse Premium?</summary>
+          <p>No hay un plazo fijo. Primero se verifica que el dinero llegó a la cuenta y después se activa el plan a mano. Enviar el comprobante no activa Premium por sí solo.</p>
+        </details>
+        <details>
+          <summary>¿Funciona junto a otros bots de moderación?</summary>
+          <p>Sí. Si otro bot borra el mensaje primero, XSOOW BOT lo detecta y sigue sin fallar. Solo conviene que sus reglas no se contradigan.</p>
+        </details>
+        <details>
+          <summary>¿Y si mi servidor es en inglés?</summary>
+          <p>Los avisos y los comandos están en español. Las estafas más comunes (casino, airdrop, free nitro) también se detectan en inglés, y con <code>/palabra</code> (Premium) añades las tuyas.</p>
+        </details>
+        <details>
+          <summary>¿Y si quiero sacar el bot de mi servidor?</summary>
+          <p>Lo expulsas como a cualquier bot. Su configuración se borra automáticamente. Solo se conserva el registro de la prueba y de Premium, para que la prueba no se repita.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+  <section class="part" id="soporte"><div class="wrap">
+<h2 class="t rv">Habla con una persona</h2>
+<div class="sup">
+<div class="rv"><h3>Soporte directo</h3><p>Escribe a XSoow por Discord. Incluye el ID de tu servidor y qué pasó.</p><a class="btn" href="https://discord.com/users/1299461377366167683">Contacto en Discord</a></div>
+<!-- Cuando tengas un servidor de soporte, añade aquí otra tarjeta con su invitación permanente -->
+<div class="rv" style="--i:1"><h3>¿Pagas desde fuera de Colombia?</h3><p>Nequi solo funciona en Colombia. Escribe a XSoow con tu país y el plan, y te indica otro medio de pago.</p><a class="btn" href="https://discord.com/users/1299461377366167683">Pedir otro medio de pago</a></div>
+</div>
+</div></section>
+
+  <section class="final" id="empezamos">
+    <div class="wrap">
+      <h2 class="rv">¿Empezamos?</h2>
+      <p class="rv">Añade XSOOW BOT a tu servidor y empieza en modo prueba: avisa, pero no castiga.</p>
+      <a class="btn rv" href="https://discord.com/oauth2/authorize?client_id=1562932609909264404&amp;scope=bot%20applications.commands&amp;permissions=1099511720964">Añadir a Discord</a>
+      <small class="rv">Gratis para siempre. 7 días de Premium al añadirlo.</small>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>Hecho por XSoow</p>
+    <nav aria-label="Enlaces">
+      <a href="terminos.html">Términos de servicio</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="https://discord.com/users/1299461377366167683">Contacto en Discord</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var els = document.querySelectorAll('.rv, #meter');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    for (var j = 0; j < els.length; j++) io.observe(els[j]);
+  }
+
+  var st = document.getElementById('stage');
+  var hudt = document.getElementById('hudt');
+  var btns = document.querySelectorAll('.ctrl [data-go]');
+  var pp = document.getElementById('pp');
+  var names = ['EL CAMBIO', 'EL DETECTOR', 'LOS 3 PASOS', 'EL SIGUIENTE NIVEL'];
+  var dur = [6200, 6600, 8200, 7600];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var playing = !reduce;
+  var cur = 1, timer = null;
+
+  function show(n) {
+    cur = n;
+    st.removeAttribute('data-s');
+    void st.offsetWidth;
+    st.setAttribute('data-s', n);
+    hudt.textContent = '[0' + n + '/04 — ' + names[n - 1] + ']';
+    for (var k = 0; k < btns.length; k++) {
+      btns[k].setAttribute('aria-current', String(k + 1 === n));
+    }
+    clearTimeout(timer);
+    if (playing) timer = setTimeout(function () { show(n % 4 + 1); }, dur[n - 1]);
+  }
+  for (var b = 0; b < btns.length; b++) {
+    btns[b].addEventListener('click', function () { show(parseInt(this.getAttribute('data-go'), 10)); });
+  }
+  pp.addEventListener('click', function () {
+    playing = !playing;
+    pp.setAttribute('aria-pressed', String(!playing));
+    pp.textContent = playing ? 'Pausar' : 'Reanudar';
+    if (playing) show(cur); else clearTimeout(timer);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) clearTimeout(timer); else if (playing) show(cur);
+  });
+  show(1);
+})();
+</script>
+<script id="cine-js">
+(function(){
+var d=document,de=d.documentElement,B=d.body,R=matchMedia('(prefers-reduced-motion:reduce)').matches,
+H=matchMedia('(hover:hover) and (pointer:fine)').matches,WIN=/Windows/.test(navigator.userAgent),
+q=function(s){return Array.prototype.slice.call(d.querySelectorAll(s))},cl=function(v,a,b){return Math.max(a,Math.min(b,v))},
+fb,cv,cx2,lite,auto,W,Hh,D=1;
+function mk(c,t){var e=d.createElement(t||'div');e.className=c;B.appendChild(e);return e}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var sv=ls('xs-fx');auto=!sv;lite=sv==='lite'||/[?&]lite/.test(location.search);
+fb=mk('fxb','button');fb.type='button';fb.onclick=function(){setLite(!lite,1)};
+function setLite(v,save){lite=v;de.classList.toggle('lite',v);if(save){ls('xs-fx',v?'lite':'full');auto=false}
+fb.textContent='Efectos: '+(v?'ligeros':'completos');fb.setAttribute('aria-pressed',String(v));if(cv)rs()}
+var cp=d.createElement('div');cp.id='cp';B.appendChild(cp);
+if(!R){var a=mk('lb t'),b=mk('lb b');setTimeout(function(){a.remove();b.remove()},2100);
+var g=mk('grain'),c=d.createElement('canvas');c.width=c.height=128;var x2=c.getContext('2d'),im=x2.createImageData(128,128);
+for(var i=0;i<im.data.length;i+=4){var v=Math.random()*255;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255}
+x2.putImageData(im,0,0);g.style.backgroundImage='url('+c.toDataURL()+')'}
+var spot=mk('spot'),si=d.createElement('i');spot.appendChild(si);
+var h=d.querySelector('h1');
+if(h&&!R){var t=h.textContent.trim();h.setAttribute('aria-label',t);
+h.innerHTML=t.split(/\s+/).map(function(w,i){return '<span class="w" aria-hidden="true"><i style="--k:'+i+'">'+w+'</i></span>'}).join(' ')}
+cv=d.createElement('canvas');cv.id='fx';B.insertBefore(cv,B.firstChild);cx2=cv.getContext('2d');
+var NR,mx=0,my=0,tx=0,ty=0,ptk=0,last=performance.now(),fc=0,dts=[],mqs=[],mr=1,vel=0,ly=scrollY,lastT='',st=d.getElementById('stage');
+function rs(){D=lite?1:Math.min(devicePixelRatio||1,1.5);W=cv.width=innerWidth*D;Hh=cv.height=innerHeight*D;NR=lite?12:22}
+setLite(lite,0);addEventListener('resize',rs);
+if(d.getAnimations)mqs=d.getAnimations().filter(function(x){return x.animationName==='mq'});
+if(st){st.style.transition='none';st.style.transformOrigin='50% 60%'}
+if(H)addEventListener('pointermove',function(e){tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1;
+if(!ptk)ptk=requestAnimationFrame(function(){ptk=0;si.style.transform='translate3d('+e.clientX+'px,'+e.clientY+'px,0)'})},{passive:true});
+function fx(t){if(!R)requestAnimationFrame(fx);var dt=t-last;last=t;if(d.hidden)return;
+if(auto&&!lite&&++fc>50&&dts.length<90){dts.push(dt);if(dts.length==90){dts.sort(function(m,n){return m-n});if(dts[45]>32)setLite(true,0);auto=false}}
+if(lite&&(fc++&1))return;
+vel+=((scrollY-ly)-vel)*.12;ly=scrollY;var av=Math.min(Math.abs(vel),90),K=lite?.75:1;
+mx+=(tx-mx)*.06;my+=(ty-my)*.06;
+if(!R&&mqs.length){var nr=1+Math.min(av,60)*.06;if(Math.abs(nr-mr)>.05){mr=nr;mqs.forEach(function(m){m.playbackRate=nr})}}
+var cam=R?.3:scrollY*.00045+t*.00005,cx=W/2+mx*30*D,cy=Hh*.46+my*18*D,bw=Math.max(W,Hh*1.6)*.55;
+cx2.clearRect(0,0,W,Hh);
+for(var i=0;i<NR;i++){var dd=(((i/NR-cam)%1)+1)%1,f=.05/(dd+.012),al=Math.min(1,dd*14)*Math.pow(1-dd,1.6)*(.5+av*.004);
+if(al<.01)continue;
+cx2.save();cx2.translate(cx,cy);cx2.rotate(i*.11+cam*1.3);cx2.beginPath();
+if(cx2.roundRect)cx2.roundRect(-bw*f/2,-bw*f*.31,bw*f,bw*f*.62,bw*f*.08);else cx2.rect(-bw*f/2,-bw*f*.31,bw*f,bw*f*.62);
+cx2.lineWidth=D*(.8+(1-dd)*2.4);cx2.strokeStyle=i%5?'rgba(255,50,70,'+al.toFixed(3)+')':'rgba(255,255,255,'+(al*.55).toFixed(3)+')';cx2.stroke();cx2.restore()}
+if(st&&!R){var hp=cl(scrollY/(innerHeight*.9),0,1),s2='perspective(1200px) translate3d(0,'+(-hp*30).toFixed(1)+'px,'+(-hp*240*K).toFixed(0)+'px) rotateY('+(-12*(1-hp)+mx*7).toFixed(2)+'deg) rotateX('+(5*(1-hp)+hp*28*K-my*4).toFixed(2)+'deg)';
+if(s2!==lastT){lastT=s2;st.style.transform=s2;st.style.opacity=(1-hp*.5).toFixed(3)}}}
+fx(performance.now());
+var secs=q('section.part,.final'),pool=[],cfg=[],on3=[],tk=0,rail=d.createElement('nav'),dots=[];
+function cf(e,i){var s=e.parentElement?Array.prototype.indexOf.call(e.parentElement.children,e):0,sg=i%2?-1:1,k=e.classList,
+c={ry:sg*34,rx:10,z:-260,y:60,dl:0,o:'50% 50%'};
+if(/^H[1-6]$/.test(e.tagName)||k.contains('intro'))c={ry:0,rx:-62,z:-200,y:36,dl:0,o:'50% 100%'};
+else if(k.contains('mod'))c={ry:sg*24,rx:6,z:-200,y:50,dl:0,o:'50% 50%'};
+else if(k.contains('plan'))c={ry:sg*70,rx:0,z:-180,y:30,dl:s*.12,o:'50% 50%'};
+else if(k.contains('cmd')||k.contains('stat'))c={ry:0,rx:-55,z:-200,y:50,dl:(s%4)*.1,o:'50% 0'};
+else if(k.contains('step')||k.contains('faq'))c.dl=s*.08;
+e.style.transformOrigin=c.o;return c}
+if(!R){pool=q('section.part h2,.dc,.step,.plan,.trial,.cmd,.stat,.mod,.pay>*,.faq,.sup>div,.intro,.final .wrap>*').filter(function(e,i,l){return !l.some(function(o){return o!==e&&o.contains(e)})});
+pool.forEach(function(e,i){e.classList.remove('rv');cfg[i]=cf(e,i)})}
+var L={inicio:'Inicio',modulos:'Funciones',detecta:'Qué detecta',empezar:'Cómo empezar',falsos:'Falsos positivos',comandos:'Comandos',panel:'Panel',planes:'Planes',preguntas:'Preguntas',soporte:'Soporte'};
+rail.className='rail';rail.setAttribute('aria-label','Secciones');
+Object.keys(L).forEach(function(id){var el=d.getElementById(id);if(!el)return;var a=d.createElement('a');a.href='#'+id;a.setAttribute('data-l',L[id]);a.setAttribute('aria-label',L[id]);rail.appendChild(a);dots.push({a:a,el:el})});
+B.appendChild(rail);
+function up(){tk=0;var ih=innerHeight,sy=scrollY,m=de.scrollHeight-ih,K=lite?.75:1;
+cp.style.transform='scaleX('+(m>0?cl(sy/m,0,1):0).toFixed(4)+')';
+var on=null;dots.forEach(function(o){var r=o.el.getBoundingClientRect();if(r.top<=ih*.4&&r.bottom>ih*.4)on=o});dots.forEach(function(o){o.a.classList.toggle('on',o===on)});
+if(R)return;
+var ri=pool.map(function(e){return e.getBoundingClientRect()});
+pool.forEach(function(e,j){var r=ri[j],c=cfg[j],p=cl((ih*(.98-c.dl*.25)-r.top)/(ih*.5),0,1);
+if(p>=1){if(on3[j]){e.style.transform='';e.style.opacity='';e.style.transition='';on3[j]=0}return}
+if(!on3[j]){e.style.transition='none';on3[j]=1}
+var q3=1-Math.pow(1-p,3),u=1-q3;
+e.style.opacity=q3.toFixed(3);e.style.transform='perspective(1000px) translate3d(0,'+(u*c.y).toFixed(1)+'px,'+(u*c.z*K).toFixed(0)+'px) rotateY('+(u*c.ry*K).toFixed(1)+'deg) rotateX('+(u*c.rx*K).toFixed(1)+'deg)'})}
+addEventListener('scroll',function(){if(!tk)tk=requestAnimationFrame(up)},{passive:true});addEventListener('resize',up);addEventListener('load',up);up();
+window.xsSmooth=function(){if(!(WIN&&H&&!R))return;var cur=scrollY,tg=cur,ra=0,ls2=cur;de.classList.add('sm');
+var lim=function(){return de.scrollHeight-innerHeight};
+var tick=function(){cur+=(tg-cur)*.12;if(Math.abs(tg-cur)<.5)cur=tg;ls2=cur;scrollTo(0,cur);ra=cur!==tg?requestAnimationFrame(tick):0};
+addEventListener('wheel',function(e){if(e.ctrlKey||e.defaultPrevented)return;
+for(var t=e.target;t&&t!==B&&t!==de;t=t.parentElement){var o=getComputedStyle(t).overflowY;if((o=='auto'||o=='scroll')&&t.scrollHeight>t.clientHeight)return}
+e.preventDefault();var dl=e.deltaMode==1?e.deltaY*40:e.deltaMode==2?e.deltaY*innerHeight:e.deltaY;
+tg=cl(tg+dl,0,lim());if(!ra)ra=requestAnimationFrame(tick)},{passive:false});
+addEventListener('scroll',function(){if(Math.abs(scrollY-ls2)>2){cancelAnimationFrame(ra);ra=0;cur=tg=scrollY}},{passive:true});
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1),el=id&&d.getElementById(id);if(!el)return;
+e.preventDefault();tg=cl(el.getBoundingClientRect().top+scrollY-84,0,lim());if(!ra)ra=requestAnimationFrame(tick);try{history.replaceState(null,'','#'+id)}catch(x){}})}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+var el=e.target,N2=+el.dataset.n,t0=performance.now();
+(function f(t){var p=Math.min(1,(t-t0)/1300);el.textContent=Math.round(N2*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});
+q('.stat b').forEach(function(e){if(!R){e.textContent=0;io.observe(e)}});
+})();
+</script>
+<script id="xs-lib">
+(function(){
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var d=document,de=d.documentElement,gs=false,shield=null,linked=false,
+U={three:'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',gsap:'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',st:'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js',lenis:'https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js'},
+IDS=['inicio','modulos','detecta','empezar','falsos','comandos','panel','planes','preguntas','soporte','empezamos'];
+function ld(u){return new Promise(function(ok,no){var s=d.createElement('script');s.src=u;s.onload=ok;s.onerror=no;d.head.appendChild(s)})}
+function tryLink(){
+if(!gs||linked)return;
+if(!window.__skew){window.__skew=1;gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.create({onUpdate:function(s){gsap.to('.mq',{skewX:Math.max(-6,Math.min(6,s.getVelocity()/-350)),duration:.5,ease:'power3.out',overwrite:true})}})}
+if(!shield)return;linked=true;shield.auto(false);
+IDS.forEach(function(id){var e=d.getElementById(id);if(e)ScrollTrigger.create({trigger:e,start:'top 60%',end:'bottom 60%',onToggle:function(s){if(s.isActive)shield.go(id)}})})}
+function lenis(){
+var L=new Lenis({duration:1.1,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t))}});
+if(gs){L.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(t){L.raf(t*1000)});gsap.ticker.lagSmoothing(0)}
+else(function r(t){L.raf(t);requestAnimationFrame(r)})(performance.now());
+d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var el=d.getElementById(a.getAttribute('href').slice(1));if(!el)return;e.preventDefault();L.scrollTo(el,{offset:-84})});
+window.xsLenis=L}
+function three(){
+var T=THREE,cv=d.createElement('canvas'),r,i,lite=de.classList.contains('lite');cv.id='gl';
+try{r=new T.WebGLRenderer({canvas:cv,alpha:true,antialias:!lite,powerPreference:'high-performance'})}catch(e){return}
+r.setPixelRatio(lite?1:Math.min(devicePixelRatio||1,1.5));r.outputEncoding=T.sRGBEncoding;
+var fx=d.getElementById('fx');d.body.insertBefore(cv,fx?fx.nextSibling:d.body.firstChild);
+var sc=new T.Scene(),cam=new T.PerspectiveCamera(40,1,.1,50),obj=new T.Group();cam.position.z=7;
+sc.add(new T.AmbientLight(0xffffff,.5));
+var l1=new T.PointLight(0xff4455,2.4,40);l1.position.set(3,3,5);sc.add(l1);
+var l2=new T.PointLight(0xffffff,1.3,40);l2.position.set(-4,-2,4);sc.add(l2);
+var sh=new T.Shape();sh.moveTo(0,1.3);sh.lineTo(1,.95);sh.lineTo(1,.1);sh.bezierCurveTo(1,-.65,.55,-1.15,0,-1.45);sh.bezierCurveTo(-.55,-1.15,-1,-.65,-1,.1);sh.lineTo(-1,.95);sh.closePath();
+var g=new T.ExtrudeGeometry(sh,{depth:.3,bevelEnabled:true,bevelThickness:.08,bevelSize:.07,bevelSegments:4,curveSegments:28});g.center();
+obj.add(new T.Mesh(g,new T.MeshStandardMaterial({color:0xe11d2e,metalness:.55,roughness:.32,emissive:0x2a0309})));
+var wm=new T.MeshStandardMaterial({color:0xffffff,emissive:0xffffff,emissiveIntensity:.4,roughness:.4});
+[[-.26,-.13,.5,Math.PI/4],[.18,.13,.95,-Math.PI/4]].forEach(function(a){var m=new T.Mesh(new T.BoxGeometry(.2,a[2],.16),wm);m.position.set(a[0],a[1],.3);m.rotation.z=a[3];obj.add(m)});
+var N=lite?24:60,im=new T.InstancedMesh(new T.BoxGeometry(.11,.11,.11),new T.MeshBasicMaterial({color:0x44ff88}),N),o=new T.Object3D(),P=[];
+for(i=0;i<N;i++)P.push({a:Math.random()*6.283,r:2+Math.random()*2,y:(Math.random()-.5)*3.2,s:.15+Math.random()*.4,p:Math.random()*6});
+sc.add(im);sc.add(obj);
+var S={x:0,y:0,s:1,ry:-.35,o:1},Tg={x:0,y:0,s:1,ry:-.35,o:1},cur='inicio',auto=true,anchor=null,vw=1,vh=1,mx=0,my=0,tx=0,ty=0,vel=0,ly=scrollY,bu=0,fc=0,
+side={modulos:-1,detecta:1,empezar:-1,falsos:1,comandos:-1,panel:1,planes:-1,preguntas:1,soporte:-1};
+function go(id){cur=id||cur;var wide=innerWidth>=1000;
+if(cur==='inicio')Tg={x:anchor?anchor.x:.4,y:0,s:anchor?anchor.s:1.2,ry:-.35,o:1};
+else if(side[cur])Tg={x:wide?side[cur]*.9:0,y:wide?-.05:.8,s:wide?.42:.3,ry:side[cur]*.6,o:wide?1:0};
+else if(cur==='empezamos')Tg={x:0,y:0,s:1.25,ry:0,o:.95}}
+function size(){r.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();vh=2*Math.tan(20*Math.PI/180)*7;vw=vh*cam.aspect;
+var st=d.getElementById('stage');if(st){var b=st.getBoundingClientRect();anchor={cy:b.top+scrollY+b.height/2,x:(b.left+b.width/2)/innerWidth*2-1,s:1.12*(b.height/innerHeight)/.66}}go()}
+addEventListener('resize',size);addEventListener('load',size);size();
+addEventListener('pointermove',function(e){tx=e.clientX/innerWidth*2-1;ty=e.clientY/innerHeight*2-1},{passive:true});
+function f(t){requestAnimationFrame(f);if(d.hidden)return;if(lite&&(fc++&1))return;
+if(auto){var id=cur,ih=innerHeight;IDS.forEach(function(k){var e=d.getElementById(k);if(e){var b=e.getBoundingClientRect();if(b.top<=ih*.6&&b.bottom>ih*.6)id=k}});if(id!==cur)go(id)}
+if(cur==='inicio'&&anchor)Tg.y=1-((anchor.cy-scrollY)/innerHeight)*2;
+for(var k in S)S[k]+=(Tg[k]-S[k])*.07;
+mx+=(tx-mx)*.06;my+=(ty-my)*.06;vel+=((scrollY-ly)-vel)*.12;ly=scrollY;bu+=(Math.min(Math.abs(vel)/40,1.6)-bu)*.1;
+cv.style.opacity=S.o.toFixed(3);if(S.o<.02)return;
+obj.position.set(S.x*vw/2,S.y*vh/2,0);obj.scale.setScalar(S.s);obj.rotation.y=S.ry+mx*.4+t*.0004+scrollY*.0012;obj.rotation.x=-my*.25;
+for(var j=0;j<N;j++){var p=P[j];p.a+=p.s*.004+vel*.0004;var rr=p.r*(1+bu*.5);
+o.position.set(obj.position.x+Math.cos(p.a)*rr*S.s*.8,obj.position.y+p.y*S.s*.6,Math.sin(p.a)*rr*.5);o.rotation.set(t*.001+p.p,t*.0013+p.p,0);o.scale.setScalar(S.s*.8+.2);o.updateMatrix();im.setMatrixAt(j,o.matrix)}
+im.instanceMatrix.needsUpdate=true;r.render(sc,cam)}
+requestAnimationFrame(f);
+shield={go:go,auto:function(v){auto=v}};window.xsShield=shield}
+ld(U.gsap).then(function(){return ld(U.st)}).then(function(){gs=!!(window.gsap&&window.ScrollTrigger)},function(){}).then(function(){
+return ld(U.lenis).then(function(){try{lenis()}catch(e){window.xsSmooth&&window.xsSmooth()}tryLink()},function(){window.xsSmooth&&window.xsSmooth();tryLink()})});
+ld(U.three).then(function(){try{three();tryLink()}catch(e){}},function(){});
+})();
+</script>
+</body>
+</html>
